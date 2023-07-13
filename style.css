@@ -1,0 +1,305 @@
+* {
+    font-family: 'VT323', 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1, h2, h3, p {
+    color: #281726;
+}
+
+.bg {
+    background: url('public/bg.png') no-repeat center center fixed;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -100;
+}
+
+.v-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.h-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    margin: 1rem;
+}
+
+.board {
+    min-width: 200px;
+    min-height: 100px;
+    background: linear-gradient(0deg, #FFC97B 0%, #EEA968 100%);
+    border-radius: 2px;
+    box-shadow: inset 0px 0px 0px 2px #B04E02, 0px 0px 0px 2px #FA950E, 0px 0px 0px 4px #853502;
+    padding: 0;
+    margin: 0;
+}
+.slot {
+    text-align: center;
+    border-radius: 0px;
+    box-shadow: 1px -1px 0px 1px #D29050, -1px 1px 0px 1px #FFE39C;
+    padding: 0;
+    width: 48px;
+    height: 48px;
+    margin: 2px;
+}
+.seedmaker-slot {
+    text-align: center;
+    border-radius: 0px;
+    padding: 0;
+    width: 48px;
+    height: 96px;
+    margin: 2px;
+}
+.seedmaker-coord {
+    line-height: 18px;
+}
+
+.tooltip {
+    font-weight: 400;
+}
+
+.form-box
+{
+    width: 30rem;
+}
+
+.form-box label
+{
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.farm-container {
+    position: relative;
+    width: 1280px;
+    height: 1040px;
+}
+img.farm {
+    width: 1280px;
+    height: 1040px;
+}
+.farm {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+.farm-slot {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    padding: 0;
+    color: white;
+    box-shadow: inset 0px 0px 0px 0.25px rgba(0, 0, 0, 0.25);
+}
+.farm-slot-container {
+    position: relative;
+}
+.farm-slot:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+.farm-tooltip {
+    display: none;
+    position: absolute;
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.75);
+    width: 80px;
+    height: 40px;
+    font-size: 22px;
+    font-weight: 400;
+    left: -32px;
+    top: -48px;
+}
+.farm-slot:hover .farm-tooltip
+{
+    display: flex;
+    justify-content: center;
+}
+.farm-slot:hover .farm-tooltip.farm-slot-true {
+    background-color: rgba(0, 0, 0, 0.75);
+    width: 80px;
+    height: 40px;
+    font-size: 22px;
+    font-weight: 400;
+    left: -32px;
+    top: -48px;
+}
+.farm-tooltip.farm-slot-true
+{
+    display: flex;
+    justify-content: center;
+    width: 60px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 400;
+    left: -22px;
+    top: -38px;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+.farm-slot-seedmaker {
+    position: absolute;
+    width: 16px;
+    height: 32px;
+    top: -16px;
+    pointer-events: none;
+}
+
+label {
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.cta {
+    padding: 1rem;
+    color: #823102;
+    background-color: #fbcd8b;
+    border: 0;
+    box-shadow: 0px 0px 7px 0px #823102;
+    transition: box-shadow 0.25s ease-in-out, transform 0.25s ease-in-out;
+    transform: scale(1.0);
+}
+
+.cta:hover {
+    box-shadow: 0px 0px 20px 2px #823102;
+}
+.cta:active {
+    color: #F5B76E;
+    background-color: #A57D4B;
+    transform: scale(1.1);
+}
+
+button, select, input, .input {
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+}
+
+div.button > .v-btn {
+    color: #FEC72E !important;
+}
+
+.button-ripple {
+    color: #823102;
+}
+
+.filter-button {
+    transition: transform 0.25s ease-in-out;
+    transform: scale(1.0);
+    width: 32px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 28px;
+    color: white;
+    text-shadow:
+        2px 2px 0 #000,
+        -2px -2px 0 #000,  
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+    cursor: pointer;
+}
+.filter-button:hover {
+    filter: brightness(70%);
+}
+.filter-button:active {
+    filter: brightness(70%);
+    transform: scale(1.2);
+}
+.filter-button.disabled {
+    filter: brightness(15%);
+}
+
+select, input[type=number], input[type=text], .input {
+    color: #370E00;
+    background-color: #fbcd8b;
+    /* border: 3px solid #5E2A1F; */
+    box-shadow: -1px 1px 0px 1px #945B34, 1px -1px 0px 1px #D77C10, -2px 2px 0px 2px #CBA163, 2px -2px 0px 2px #692617;
+}
+
+.disabled {
+    color: #826665;
+    font-weight: 400;
+}
+
+.date {
+    width: 7rem;
+}
+
+.time-of-day {
+    font-weight: 400;
+    font-size: 24px;
+    text-align: right;
+}
+.seed {
+    font-weight: 800;
+    font-size: 28px;
+    color: white;
+    text-shadow:
+        2px 2px 0 #000,
+        -2px -2px 0 #000,  
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+}
+.seed-counter {
+    font-weight: 500;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    text-shadow:
+        1px 1px 0 #000,
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+        display: block;
+        position: absolute;
+        bottom: -4px;
+        right: 4px;
+}
+
+.hide {
+    display: none;
+}
+.relative {
+    position: relative;
+}
+.flex { display: flex; }
+.row {flex-direction: row;}
+.column { flex-direction: column; }
+.wrap { flex-wrap: wrap;}
+.no-wrap { flex-wrap: nowrap; }
+.justify-start { justify-content: start;}
+.justify-center { justify-content: center;}
+.justify-end { justify-content: end;}
+.align-center { align-content: center; }
+.items-start { align-items: start; }
+.items-center { align-items: center; }
+.items-end { align-items: end; }
+.self-start { align-self: flex-start;}
+.self-center { align-self: center;}
+.self-end { align-self: flex-end;}
+.shrink { flex-shrink: 1; }
+.text-left {text-align: left;}
+.text-center {text-align: center;}
+.text-right {text-align: right;}
+
+.mt { margin-top: 0.75rem; }
+.mb { margin-bottom: 0.75rem; }
+.ml { margin-left: 0.75rem; }
+.mr { margin-right: 0.75rem; }
+
+.pa { padding: 0.75rem; }
+.pt { padding-top: 0.75rem; }
+.pb { padding-bottom: 0.75rem; }
+.pl { padding-left: 0.75rem; }
+.pr { padding-right: 0.75rem; }
