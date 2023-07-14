@@ -23,7 +23,7 @@ h1, h2, h3, p {
         width: 350px;
     }
 }
-@media screen and (max-width:768px) {
+@media screen and (max-width:1200px) {
     .header-logo {
         width: 250px;
     }
@@ -37,7 +37,7 @@ h1 {
         font-size: x-large;
     }
 }
-@media screen and (max-width:768px) {
+@media screen and (max-width:1200px) {
     h1 {
         font-size: xx-large;
     }
@@ -219,7 +219,7 @@ img.farm {
     pointer-events: none;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:1200px) {
     .farm-container {
         width: 640px;
         height: 520px;
