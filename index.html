@@ -25,34 +25,47 @@
             <div class="flex column align-center container margin-auto">
                 
                 <div class="container mb-5 flex column align-center">
-                    <img src="public/logo.png" width="500">
+                    <img class="header-logo" src="public/logo.png">
                     <h1 class="paint">Seed Maker Simulator</h1>
                 </div>
 
                 <!-- SEED MAKERS COORDINATES (FARM PREVIEW) -->
                 <!-- 80 x 65 -->
-                <div class="flex row justify-center my-4">
-                    <div class="spacer"></div>
-                    <div class="farm-container no-select">
-                        <img src="public/farm.jpg" class="farm no-select">
-                        <div class="farm no-select">
-                            <div v-for="(row, y) in farmSlots" class="flex row">
-                                <div v-for="(slot, x) in row" class="flex column" >
-                                    <div class="farm-slot no-select" @mousedown="toggleFarmSlot(x,y)" @mouseover="mouseOverFarmSlot(x,y)">
-                                        <div class="farm-slot-container no-pointer no-select">
-                                            <div :class="`farm-tooltip align-center no-pointer no-select ${farmSlots[y][x] === true ? 'farm-slot-true' : ''}`">{{x}}, {{y}}</div>
-                                            <img src="public/seedmaker.png" class="farm-slot-seedmaker no-pointer no-select" v-show="farmSlots[y][x] === true">
+                <div class="flex row justify-center my-4 mx-4">
+                    <!-- MAP -->
+                    <div class="flex column align-center justify-center">
+                        <div class="farm-container no-select">
+                            <img src="public/farm.jpg" class="farm no-select">
+                            <div class="farm no-select">
+                                <div v-for="(row, y) in farmSlots" class="flex row">
+                                    <div v-for="(slot, x) in row" class="flex column" >
+                                        <div class="farm-slot no-select" @mousedown="toggleFarmSlot(x,y)" @mouseover="mouseOverFarmSlot(x,y)">
+                                            <div class="farm-slot-container no-pointer no-select">
+                                                <div :class="`farm-tooltip align-center no-pointer no-select ${farmSlots[y][x] === true ? 'farm-slot-true' : ''}`">{{x}}, {{y}}</div>
+                                                <img src="public/seedmaker.png" class="farm-slot-seedmaker no-pointer no-select" v-show="farmSlots[y][x] === true">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- CORNER BUTTONS -->
+                        <div class="flex flex-row self-start mt-2">
+                            <div @click="clearSeedMakers">
+                                <img src="public/trashcan.png" :class="`map-button px-1 ${showMixed ? '' : 'disabled'}`">
+                                <v-tooltip activator="parent" location="top">Delete All</v-tooltip>
+                            </div>
+                            <div @click="loadSaveFile">
+                                <img src="public/computer.png" :class="`map-button px-1 ${showMixed ? '' : 'disabled'}`">
+                                <v-tooltip activator="parent" location="top">Load from savefile</v-tooltip>
+                            </div>
+                        </div>
                     </div>
-                    <div class="spacer"></div>
                 </div>
                 
                 <!-- FORM -->
-                <v-card color="primary" elevation="8" class="pa-1 my-4">
+                <v-card color="primary" elevation="8" class="pa-1 ma-4">
                     <div class="flex justify-center board">
                         <div class="v-box ">
                             <div class="flex container column pa-2">
@@ -122,112 +135,140 @@
                 
                 <div class="mt mb"></div>
 
-                <!-- RESULT TABLE -->
-                <v-card color="primary" elevation="8" class="pa-1">
-                    <div class="board container px-5 py-3">
-                        <div class="flex column justify-end mb-4">
-                            <div class="flex row justify-start align-center items-center">
-                                <img :width="24" src="public/filter.png" class="ma-0">
-                                <div class="ml-1 mr-4 self-center">Filters:</div>
-                                <div :class="`filter-button ${show1 ? '' : 'disabled'}`" @click="toggleFilter1">
-                                    1
-                                    <v-tooltip activator="parent" location="top">Filter: 1 Same Seed (the one inserted into the seed maker)</v-tooltip>
-                                </div>
-                                <div :class="`filter-button ${show2 ? '' : 'disabled'}`" @click="toggleFilter2">
-                                    2
-                                    <v-tooltip activator="parent" location="top">Filter: 2 Same Seeds (the one inserted into the seed maker)</v-tooltip>
-                                </div>
-                                <div :class="`filter-button ${show3 ? '' : 'disabled'}`" @click="toggleFilter3">
-                                    3
-                                    <v-tooltip activator="parent" location="top">Filter: 3 Same Seeds (the one inserted into the seed maker)</v-tooltip>
-                                </div>
-                                <div class="flex justify-center align-center" @click="toggleFilterMixed">
-                                    <img src="public/mixed.png" :class="`filter-button px-1 ${showMixed ? '' : 'disabled'}`">
-                                    <v-tooltip activator="parent" location="top">Filter: Mixed Seeds</v-tooltip>
-                                </div>
-                                <div class="flex justify-center align-center" @click="toggleFilterAncient">
-                                    <img src="public/ancient.png" :class="`filter-button px-1 ${showAncient ? '' : 'disabled'}`">
-                                    <v-tooltip activator="parent" location="top">Filter: Ancient Seed</v-tooltip>
-                                </div>
-                                <div class="flex justify-center align-center" @click="toggleFilterEmptyHours">
-                                    <img src="public/clock.png" :class="`filter-button px-1 ${showEmptyHours ? '' : 'disabled'}`">
-                                    <v-tooltip activator="parent" location="top">Filter: Empty Hours</v-tooltip>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div v-show="isCalculatingSchedule">
-                            <v-progress-linear color="paint" model-value="progressPercentage" :height="20"></v-progress-linear>
-                        </div>
-
-                        <div class="flex column" v-show="!isCalculatingSchedule">
-                            
-                            <!-- SEED MAKERS -->
-                            <div class="flex row">
-
-                                <!-- timeOfDay empty column -->
-                                <div class="time-of-day self-end mr-2 seedmaker-slot"></div>
-
-                                <div class="flex items-center align-center justify-center mb-2" v-for="(seedmaker, i) in daySchedule.seedMakers">
-                                    <div class="seedmaker-slot self-center flex justify-center align-center">
-                                        <div class="flex column">
-                                            <v-img
-                                            :width="32"
-                                            cover
-                                            src="public/seedmaker.png"
-                                            ></v-img>
-                                            <div class="seedmaker-coord">X: {{ seedmaker.x }}</div>
-                                            <div class="seedmaker-coord">Y: {{ seedmaker.y }}</div>
-                                        </div>
-                                        <v-tooltip activator="parent" location="top" class="tooltip">Seed Maker #{{seedmaker.index}} - (x: {{seedmaker.x}}, y:{{seedmaker.y}}) </v-tooltip>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!-- HOURS -->
-                            <div v-for="(hour, i) in filteredDaySchedule.hours">
-                                <div class="flex row" v-show="hour.isVisible || showEmptyHours">
-                                    <div class="time-of-day self-end mr-2">{{ DAYHOURS[i] }}</div>
-                                    
-                                    <div class="flex items-center align-center justify-center" v-for="(seed, j) in hour.seeds">
-                                        <div v-if="seed.type === 0" class="slot self-center flex justify-center align-center">
-                                            <span class="seed self-center">{{ isSeedVisible(seed) ? seed.amount : '' }}</span>
-                                        </div>
-                                    
-                                        <div v-else-if="seed.type === 1" class="slot self-center flex justify-center align-center relative pa-1">
-                                            <v-img v-show="showMixed"
-                                            :width="32"
-                                            cover
-                                            src="public/mixed.png"
-                                            ></v-img>
-                                            <div v-if="seed.amount > 1" v-show="showMixed" class="seed-counter">{{ seed.amount }}</div>
-                                            <v-tooltip activator="parent" location="top">Mixed Seeds: {{ seed.amount }}</v-tooltip>
-                                        </div>
-                                        
-                                        <div v-else-if="seed.type === 2" class="slot self-center flex justify-center align-center pa-1">
-                                            <v-img v-if="showAncient"
-                                            :width="32"
-                                            cover
-                                            src="public/ancient.png"
-                                            ></v-img>
-                                            <v-tooltip activator="parent" location="top">Ancient Seed: 1</v-tooltip>
-                                        </div>
-        
-                                        <div v-else class="slot self-center flex justify-center align-center pa-1">
-                                            <v-img
-                                            :width="24"
-                                            cover
-                                            src="public/x.png"
-                                            ></v-img>
-                                            <v-tooltip activator="parent" location="top">Server failed to calculate this value.</v-tooltip>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="flex column">
+                    <div class="flex row">
+                        <div id="donate" class="donate px-2 no-select" @click.stop="openurl('https://www.paypal.com/donate?hosted_button_id=28PBV9DFYQC72')">
+                            <div class="flex row align-center justify-center donate-content">
+                                <div class="mr-4">Buy me a </div>
+                                <img src="public/coffee.png" class="filter-button" @click.stop="openurl('https://www.paypal.com/donate?hosted_button_id=28PBV9DFYQC72')">
                             </div>
                         </div>
                     </div>
-                </v-card>
+                    <div class="flex row align-center mt-2">
+                        <div>
+                            <img src="public/paypal.png" class="donate-button filter-button" @click.stop="openurl('https://www.paypal.com/donate?hosted_button_id=28PBV9DFYQC72')">
+                        </div>
+                        <div>
+                            <img src="public/ko-fi.png" class="donate-button filter-button ml-1" @click.stop="openurl('https://ko-fi.com/flafdraws')">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt mb"></div>
+
+                <!-- RESULTS BOARD -->
+                <div class="flex row align-center justify-center mx-4">
+                    <v-card color="primary" elevation="8" class="pa-1">
+                        <div class="board container px-5 py-3">
+
+                            <!-- FILTERS -->
+                            <div class="flex column justify-end mb-4">
+                                <div class="flex row justify-start align-center items-center">
+                                    <img :width="24" src="public/filter.png" class="ma-0">
+                                    <div class="ml-1 mr-4 self-center">Filters:</div>
+                                    <div :class="`filter-button ${show1 ? '' : 'disabled'}`" @click="toggleFilter1">
+                                        1
+                                        <v-tooltip activator="parent" location="top">Filter: 1 Same Seed (the one inserted into the seed maker)</v-tooltip>
+                                    </div>
+                                    <div :class="`filter-button ${show2 ? '' : 'disabled'}`" @click="toggleFilter2">
+                                        2
+                                        <v-tooltip activator="parent" location="top">Filter: 2 Same Seeds (the one inserted into the seed maker)</v-tooltip>
+                                    </div>
+                                    <div :class="`filter-button ${show3 ? '' : 'disabled'}`" @click="toggleFilter3">
+                                        3
+                                        <v-tooltip activator="parent" location="top">Filter: 3 Same Seeds (the one inserted into the seed maker)</v-tooltip>
+                                    </div>
+                                    <div class="flex justify-center align-center" @click="toggleFilterMixed">
+                                        <img src="public/mixed.png" :class="`filter-button px-1 ${showMixed ? '' : 'disabled'}`">
+                                        <v-tooltip activator="parent" location="top">Filter: Mixed Seeds</v-tooltip>
+                                    </div>
+                                    <div class="flex justify-center align-center" @click="toggleFilterAncient">
+                                        <img src="public/ancient.png" :class="`filter-button px-1 ${showAncient ? '' : 'disabled'}`">
+                                        <v-tooltip activator="parent" location="top">Filter: Ancient Seed</v-tooltip>
+                                    </div>
+                                    <div class="flex justify-center align-center" @click="toggleFilterEmptyHours">
+                                        <img src="public/clock.png" :class="`filter-button px-1 ${showEmptyHours ? '' : 'disabled'}`">
+                                        <v-tooltip activator="parent" location="top">Filter: Empty Hours</v-tooltip>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- USELESS PROGRESS BAR -->
+                            <!-- JS is 1-thread only, this isn't going to render -->
+                            <div v-show="isCalculatingSchedule">
+                                <v-progress-linear color="paint" model-value="progressPercentage" :height="20"></v-progress-linear>
+                            </div>
+
+                            <!-- RESULTS -->
+                            <div class="flex column" v-show="!isCalculatingSchedule">
+                                
+                                <!-- SEED MAKERS -->
+                                <div class="flex row">
+
+                                    <!-- timeOfDay empty column -->
+                                    <div class="time-of-day self-end mr-2 seedmaker-slot"></div>
+
+                                    <div class="flex items-center align-center justify-center mb-2" v-for="(seedmaker, i) in daySchedule.seedMakers">
+                                        <div class="seedmaker-slot self-center flex justify-center align-center">
+                                            <div class="flex column">
+                                                <v-img
+                                                :width="32"
+                                                cover
+                                                src="public/seedmaker.png"
+                                                ></v-img>
+                                                <div class="seedmaker-coord">X: {{ seedmaker.x }}</div>
+                                                <div class="seedmaker-coord">Y: {{ seedmaker.y }}</div>
+                                            </div>
+                                            <v-tooltip activator="parent" location="top" class="tooltip">Seed Maker #{{seedmaker.index}} - (x: {{seedmaker.x}}, y:{{seedmaker.y}}) </v-tooltip>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- HOURS -->
+                                <div v-for="(hour, i) in filteredDaySchedule.hours">
+                                    <div class="flex row" v-show="hour.isVisible || showEmptyHours">
+                                        <div class="time-of-day self-end mr-2">{{ DAYHOURS[i] }}</div>
+                                        
+                                        <div class="flex items-center align-center justify-center" v-for="(seed, j) in hour.seeds">
+                                            <div v-if="seed.type === 0" class="slot self-center flex justify-center align-center">
+                                                <span class="seed self-center">{{ isSeedVisible(seed) ? seed.amount : '' }}</span>
+                                            </div>
+                                        
+                                            <div v-else-if="seed.type === 1" class="slot self-center flex justify-center align-center relative pa-1">
+                                                <v-img v-show="showMixed"
+                                                :width="32"
+                                                cover
+                                                src="public/mixed.png"
+                                                ></v-img>
+                                                <div v-if="seed.amount > 1" v-show="showMixed" class="seed-counter">{{ seed.amount }}</div>
+                                                <v-tooltip activator="parent" location="top">Mixed Seeds: {{ seed.amount }}</v-tooltip>
+                                            </div>
+                                            
+                                            <div v-else-if="seed.type === 2" class="slot self-center flex justify-center align-center pa-1">
+                                                <v-img v-if="showAncient"
+                                                :width="32"
+                                                cover
+                                                src="public/ancient.png"
+                                                ></v-img>
+                                                <v-tooltip activator="parent" location="top">Ancient Seed: 1</v-tooltip>
+                                            </div>
+            
+                                            <div v-else class="slot self-center flex justify-center align-center pa-1">
+                                                <v-img
+                                                :width="24"
+                                                cover
+                                                src="public/x.png"
+                                                ></v-img>
+                                                <v-tooltip activator="parent" location="top">Server failed to calculate this value.</v-tooltip>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </v-card>
+                </div>
             </div>
         </div>
 

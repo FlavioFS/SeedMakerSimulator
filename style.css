@@ -6,12 +6,41 @@ html, body {
     font-family: 'VT323', 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 h1, h2, h3, p {
     color: #281726;
 }
 
+.header-logo {
+    width: 500px;
+}
+@media screen and (max-width:480px) {
+    .header-logo {
+        width: 350px;
+    }
+}
+@media screen and (max-width:768px) {
+    .header-logo {
+        width: 250px;
+    }
+}
+
 h1 {
     font-size: xxx-large;
+}
+@media screen and (max-width:480px) {
+    h1 {
+        font-size: x-large;
+    }
+}
+@media screen and (max-width:768px) {
+    h1 {
+        font-size: xx-large;
+    }
 }
 
 h1.paint {
@@ -186,7 +215,7 @@ img.farm {
     pointer-events: none;
 }
 
-@media screen and (max-width:640px) {
+@media screen and (max-width:768px) {
     .farm-container {
         width: 640px;
         height: 520px;
@@ -228,7 +257,47 @@ img.farm {
     }
 }
 
-
+@media screen and (max-width:480px) {
+    .farm-container {
+        width: 320px;
+        height: 260px;
+    }
+    img.farm {
+        width: 320px;
+        height: 260px;
+    }
+    .farm-slot {
+        width: 4px;
+        height: 4px;
+    }
+    .farm-tooltip {
+        width: 18px;
+        height: 8px;
+        font-size: 6px;
+        left: -7px;
+        top: -10px;
+    }
+    .farm-slot:hover .farm-tooltip.farm-slot-true {
+        width: 18px;
+        height: 8px;
+        font-size: 6px;
+        left: -7px;
+        top: -10px;
+    }
+    .farm-tooltip.farm-slot-true
+    {
+        width: 14px;
+        height: 6px;
+        font-size: 5px;
+        left: -5px;
+        top: -8px;
+    }
+    .farm-slot-seedmaker {
+        width: 4px;
+        height: 8px;
+        top: -4px;
+    }
+}
 /* =================================== */
 
 
@@ -270,6 +339,66 @@ div.button > .v-btn {
     color: #823102;
 }
 
+
+/* ===================================
+ *  DONATE
+ * =================================== */
+ .donate {
+    background-image: url('public/speech.png');
+    image-rendering: pixelated;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 270px;
+    height: 93px;
+    font-size: xx-large;
+    cursor: pointer;
+    transition: transform 0.25s ease-in-out;
+    transform: scale(1.0);
+    padding-top: 3px;
+    padding-bottom: 9px;
+    z-index: 2;
+}
+.donate:hover {
+    transform: scale(1.1);
+}
+.donate-content {
+    height: 81px;
+}
+.donate-button.filter-button {
+    width: 32px;
+}
+.donate-button-group {
+    padding-top: 3px;
+    padding-bottom: 9px;
+}
+/* =================================== */
+    
+
+/* ===================================
+ *  MAP BUTTONS
+ * =================================== */
+.map-button {
+    transition: transform 0.25s ease-in-out;
+    transform: scale(1.0);
+    width: 48px;
+    cursor: pointer;
+}
+.map-button:hover {
+    filter: brightness(70%);
+}
+.map-button:active {
+    filter: brightness(70%);
+    transform: scale(1.2);
+}
+.map-button.disabled {
+    filter: brightness(15%);
+}
+/* =================================== */
+
+
+/* ===================================
+ *  FITLER BUTTONS
+ * =================================== */
 .filter-button {
     transition: transform 0.25s ease-in-out;
     transform: scale(1.0);
@@ -296,6 +425,7 @@ div.button > .v-btn {
 .filter-button.disabled {
     filter: brightness(15%);
 }
+/* =================================== */
 
 select, input[type=number], input[type=text], .input {
     color: #370E00;

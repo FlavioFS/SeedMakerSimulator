@@ -172,6 +172,10 @@ createApp({
             }
             return false;
         }
+
+        function openurl(url) {
+            window.open(url, "__blank");
+        }
         
         const daysPlayed = computed(() => {
             return getDaysPlayed(year.value, season.value, day.value);
@@ -218,6 +222,7 @@ createApp({
             showAncient,
             showEmptyHours,
             isSeedVisible,
+            openurl,
             toggleFilter1,
             toggleFilter2,
             toggleFilter3,
