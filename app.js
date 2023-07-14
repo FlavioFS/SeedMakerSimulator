@@ -75,12 +75,12 @@ createApp({
         const season = ref(1);
         const day = ref(23);
         const coordinates = ref("");
+        const coordinatesRaw = ref([]);
         const daySchedule = ref({});
+        const isCalculatingSchedule = ref(false);
+        const calculationProgress = ref(0);
         const farmSlots = ref([]);
         setupFarmSlots();
-        
-        const requestText = ref('');
-        const responseText = ref('');
 
         const show1 = ref(true);
         const show2 = ref(true);
@@ -125,41 +125,28 @@ createApp({
                 }
             }
 
+            coordinatesRaw.value = newCoords;
             coordinates.value = JSON.stringify(newCoords);
 
             return newCoords.length > 0;
         }
 
-        function request () {
-            if (!updateCoordinates()) return; // Should display warning
-
-            const url='http://localhost:3000/makeDay';
-            const params = {
-                gameID: gameID.value,
-                daysPlayed: daysPlayed.value,
-                coordinates: coordinates.value
-            }
+        function generateDay () {
+            if (!updateCoordinates() || isCalculatingSchedule.value) return; // Should display warning
             
-            requestText.value = url + formatParams(params);
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET", requestText.value);
-            xhr.send();
-    
-            xhr.onreadystatechange = (e) => {
-                responseText.value = xhr.responseText;
-
-                try {
-                    const json = JSON.parse(xhr.responseText);
-                    daySchedule.value = json;
-                    console.log(daySchedule.value);
-                } catch (error) {
-                    
-                }
-            }
-        }
-
-        function getSeed(x, y, timeOfDay) {
-            return daysPlayed.value + Math.floor(gameID.value / 2) + x + y * 77 + timeOfDay;
+            isCalculatingSchedule.value = true;
+            calculationProgress.value = 0;
+            new Promise((resolve)=>{
+                resolve(
+                    SeedMaker.daySchedule(gameID.value, daysPlayed.value, coordinatesRaw.value, (percentage) => {
+                        calculationProgress.value = percentage;
+                    })
+                );
+            }).then((newSchedule) => {
+                daySchedule.value = newSchedule;
+            }).finally(() => {
+                isCalculatingSchedule.value = false;
+            });
         }
 
         function isSeedVisible(seed) {
@@ -198,10 +185,12 @@ createApp({
             return filteredResult;
         });
 
+        const progressPercentage = computed(() => {
+            return calculationProgress.value * 100;
+        })
+
         return {
-            request,
-            requestText,
-            responseText,
+            generateDay,
             gameID,
             daysPlayed,
             coordinates,
@@ -211,6 +200,9 @@ createApp({
             farmSlots,
             toggleFarmSlot,
             daySchedule,
+            isCalculatingSchedule,
+            calculationProgress,
+            progressPercentage,
             filteredDaySchedule,
             DAYHOURS,
             show1,

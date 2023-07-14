@@ -1,9 +1,17 @@
+html, body {
+    overflow-x: auto;
+}
+
 * {
     font-family: 'VT323', 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 h1, h2, h3, p {
     color: #281726;
+}
+
+h1 {
+    font-size: xxx-large;
 }
 
 .bg {
@@ -32,6 +40,14 @@ h1, h2, h3, p {
 
 .container {
     margin: 1rem;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .board {
@@ -79,6 +95,14 @@ h1, h2, h3, p {
     margin-bottom: 0.25rem;
 }
 
+.spacer {
+    width: 20px;
+    height: 10px;
+}
+
+/* ===================================
+ *  FARM PREVIEW
+ * =================================== */
 .farm-container {
     position: relative;
     width: 1280px;
@@ -152,6 +176,52 @@ img.farm {
     top: -16px;
     pointer-events: none;
 }
+
+@media screen and (max-width:640px) {
+    .farm-container {
+        width: 640px;
+        height: 520px;
+    }
+    img.farm {
+        width: 640px;
+        height: 520px;
+    }
+    .farm-slot {
+        width: 8px;
+        height: 8px;
+    }
+    .farm-tooltip {
+        width: 36px;
+        height: 16px;
+        font-size: 12px;
+        left: -14px;
+        top: -24px;
+    }
+    .farm-slot:hover .farm-tooltip.farm-slot-true {
+        width: 36px;
+        height: 16px;
+        font-size: 12px;
+        left: -14px;
+        top: -24px;
+    }
+    .farm-tooltip.farm-slot-true
+    {
+        width: 28px;
+        height: 12px;
+        font-size: 10px;
+        left: -10px;
+        top: -20px;
+    }
+    .farm-slot-seedmaker {
+        width: 8px;
+        height: 16px;
+        top: -8px;
+    }
+}
+
+
+/* =================================== */
+
 
 label {
     font-size: 16px;
@@ -293,6 +363,7 @@ select, input[type=number], input[type=text], .input {
 .text-center {text-align: center;}
 .text-right {text-align: right;}
 
+.margin-auto { margin: auto; }
 .mt { margin-top: 0.75rem; }
 .mb { margin-bottom: 0.75rem; }
 .ml { margin-left: 0.75rem; }
@@ -303,3 +374,9 @@ select, input[type=number], input[type=text], .input {
 .pb { padding-bottom: 0.75rem; }
 .pl { padding-left: 0.75rem; }
 .pr { padding-right: 0.75rem; }
+
+.test {
+    background-color: #000;
+    width: 2000px;
+    height: 100px;
+}
