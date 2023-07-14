@@ -40,10 +40,10 @@
                                 <div class="farm no-select">
                                     <div v-for="(row, y) in farmSlots" class="flex row">
                                         <div v-for="(slot, x) in row" class="flex column" >
-                                            <div class="farm-slot no-select" @mousedown="toggleFarmSlot(x,y)" @mouseover="mouseOverFarmSlot(x,y)">
+                                            <div class="farm-slot tooltip-activator no-select" @mousedown="toggleFarmSlot(x,y)" @mouseover="mouseOverFarmSlot(x,y)">
                                                 <div class="farm-slot-container no-pointer no-select">
-                                                    <div :class="`farm-tooltip align-center no-pointer no-select ${farmSlots[y][x] === true ? 'farm-slot-true' : ''}`">{{x}}, {{y}}</div>
-                                                    <img src="public/seedmaker.png" class="farm-slot-seedmaker no-pointer no-select" v-show="farmSlots[y][x] === true">
+                                                    <div :class="`tooltip align-center ${farmSlots[y][x] === true ? 'tooltip-active' : ''}`">{{x}}, {{y}}</div>
+                                                    <img src="public/seedmaker.png" class="farm-slot-seedmaker" v-show="farmSlots[y][x] === true">
                                                 </div>
                                             </div>
                                         </div>
@@ -161,7 +161,7 @@
 
                 <!-- RESULTS BOARD -->
                 <div class="flex row align-center justify-center mx-4">
-                    <v-card color="primary" elevation="8" class="pa-1">
+                    <v-card color="primary" elevation="8" class="pa-1 overflow-visible">
                         <div class="board container px-5 py-3">
 
                             <!-- FILTERS -->
@@ -234,27 +234,34 @@
                                         <div class="time-of-day self-end mr-2">{{ DAYHOURS[i] }}</div>
                                         
                                         <div class="flex items-center align-center justify-center" v-for="(seed, j) in hour.seeds">
-                                            <div v-if="seed.type === 0" class="slot self-center flex justify-center align-center">
+                                            <div v-if="seed.type === 0" class="slot self-center flex justify-center align-center tooltip-activator">
                                                 <span class="seed self-center">{{ isSeedVisible(seed) ? seed.amount : '' }}</span>
+                                                <div class="seed-tooltip absolute">
+                                                    <div class="tooltip align-center">Same Seeds: {{ seed.amount }}</div>
+                                                </div>
                                             </div>
                                         
-                                            <div v-else-if="seed.type === 1" class="slot self-center flex justify-center align-center relative pa-1">
+                                            <div v-else-if="seed.type === 1" class="slot self-center flex justify-center align-center tooltip-activator relative pa-1">
                                                 <v-img v-show="showMixed"
                                                 :width="32"
                                                 cover
                                                 src="public/mixed.png"
                                                 ></v-img>
                                                 <div v-if="seed.amount > 1" v-show="showMixed" class="seed-counter">{{ seed.amount }}</div>
-                                                <v-tooltip activator="parent" location="top">Mixed Seeds: {{ seed.amount }}</v-tooltip>
+                                                <div class="seed-tooltip absolute">
+                                                    <div class="tooltip align-center">Mixed Seeds: {{ seed.amount }}</div>
+                                                </div>
                                             </div>
                                             
-                                            <div v-else-if="seed.type === 2" class="slot self-center flex justify-center align-center pa-1">
+                                            <div v-else-if="seed.type === 2" class="slot self-center flex justify-center align-center tooltip-activator pa-1">
                                                 <v-img v-if="showAncient"
                                                 :width="32"
                                                 cover
                                                 src="public/ancient.png"
                                                 ></v-img>
-                                                <v-tooltip activator="parent" location="top">Ancient Seed: 1</v-tooltip>
+                                                <div class="seed-tooltip absolute">
+                                                    <div class="tooltip align-center">Ancient Seed: {{ seed.amount }}</div>
+                                                </div>
                                             </div>
             
                                             <div v-else class="slot self-center flex justify-center align-center pa-1">

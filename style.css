@@ -122,10 +122,6 @@ h1.paint {
     line-height: 18px;
 }
 
-.tooltip {
-    font-weight: 400;
-}
-
 .form-box
 {
     width: 30rem;
@@ -173,7 +169,26 @@ img.farm {
 .farm-slot:hover {
     background-color: rgba(0, 0, 0, 0.25);
 }
-.farm-tooltip {
+
+
+.seed-tooltip {
+    pointer-events: none;
+    text-decoration: none;
+    align-content: center;
+}
+
+.seed-tooltip .tooltip {
+    top: -45px;
+    left: 0px;
+    width: 180px;
+    height: 50px;
+    z-index: 100;
+    text-align: center;
+    line-height: 20px;
+}
+
+.tooltip {
+    color: white;
     display: none;
     position: absolute;
     pointer-events: none;
@@ -184,13 +199,17 @@ img.farm {
     font-weight: 400;
     left: -32px;
     top: -48px;
+    pointer-events: none;
+    text-decoration: none;
+    align-content: center;
 }
-.farm-slot:hover .farm-tooltip
+.tooltip-activator:hover .tooltip
 {
     display: flex;
+    position: relative;
     justify-content: center;
 }
-.farm-slot:hover .farm-tooltip.farm-slot-true {
+.tooltip-activator:hover .tooltip.tooltip-active {
     background-color: rgba(0, 0, 0, 0.75);
     width: 80px;
     height: 40px;
@@ -199,7 +218,7 @@ img.farm {
     left: -32px;
     top: -48px;
 }
-.farm-tooltip.farm-slot-true
+.tooltip.tooltip-active
 {
     display: flex;
     justify-content: center;
@@ -513,12 +532,10 @@ select, input[type=number], input[type=text], .input {
         right: 4px;
 }
 
-.hide {
-    display: none;
-}
-.relative {
-    position: relative;
-}
+.overflow-visible { overflow: visible; }
+.hide { display: none; }
+.relative { position: relative; }
+.absolute { position: absolute; }
 .flex { display: flex; }
 .row {flex-direction: row;}
 .column { flex-direction: column; }
