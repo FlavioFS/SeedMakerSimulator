@@ -330,6 +330,16 @@ button, select, input, .input {
     font-weight: 500;
     text-align: center;
 }
+@media screen and (max-width: 480px) {
+    button, select, input, .input {
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 768px) {
+    button, select, input, .input {
+        font-size: 20px;
+    }
+}
 
 div.button > .v-btn {
     color: #FEC72E !important;
@@ -440,7 +450,17 @@ select, input[type=number], input[type=text], .input {
 }
 
 .date {
-    width: 7rem;
+    width: 100px;
+}
+@media screen and (max-width: 480px) {
+    .date {
+        width: 70px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .date {
+        width: 85px;
+    }
 }
 
 .time-of-day {
