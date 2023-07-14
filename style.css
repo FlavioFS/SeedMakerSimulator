@@ -357,6 +357,17 @@ div.button > .v-btn {
 /* ===================================
  *  DONATE
  * =================================== */
+ @keyframes bounce {
+    0% { transform: scale(1.0); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1.0); }
+ }
+ @keyframes bouncemax {
+    0% { transform: scale(1.0); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1.0); }
+ }
+ 
  .donate {
     background-image: url('public/speech.png');
     image-rendering: pixelated;
@@ -366,14 +377,16 @@ div.button > .v-btn {
     height: 93px;
     font-size: xx-large;
     cursor: pointer;
-    transition: transform 0.25s ease-in-out;
-    transform: scale(1.0);
     padding-top: 3px;
     padding-bottom: 9px;
     z-index: 2;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-name: bounce;
 }
 .donate:hover {
-    transform: scale(1.1);
+    animation-name: bouncemax;
 }
 .donate-content {
     height: 81px;
