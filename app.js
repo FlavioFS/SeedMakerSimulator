@@ -69,11 +69,10 @@ createApp({
             "01:00", "01:10", "01:20", "01:30", "01:40", "01:50"
         ];
 
-       
-        const gameID = ref(337650221);
-        const year = ref(3);
+        const gameID = ref(123456789);
+        const year = ref(1);
         const season = ref(1);
-        const day = ref(23);
+        const day = ref(1);
         const coordinates = ref("");
         const coordinatesRaw = ref([]);
         const daySchedule = ref({});

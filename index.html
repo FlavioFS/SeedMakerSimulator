@@ -34,15 +34,17 @@
                 <div class="flex row justify-center my-4 mx-4">
                     <!-- MAP -->
                     <div class="flex column align-center justify-center">
-                        <div class="farm-container no-select">
-                            <img src="public/farm.jpg" class="farm no-select">
-                            <div class="farm no-select">
-                                <div v-for="(row, y) in farmSlots" class="flex row">
-                                    <div v-for="(slot, x) in row" class="flex column" >
-                                        <div class="farm-slot no-select" @mousedown="toggleFarmSlot(x,y)" @mouseover="mouseOverFarmSlot(x,y)">
-                                            <div class="farm-slot-container no-pointer no-select">
-                                                <div :class="`farm-tooltip align-center no-pointer no-select ${farmSlots[y][x] === true ? 'farm-slot-true' : ''}`">{{x}}, {{y}}</div>
-                                                <img src="public/seedmaker.png" class="farm-slot-seedmaker no-pointer no-select" v-show="farmSlots[y][x] === true">
+                        <div class="board box-shadow">
+                            <div class="farm-container no-select">
+                                <img src="public/farm.jpg" class="farm no-select">
+                                <div class="farm no-select">
+                                    <div v-for="(row, y) in farmSlots" class="flex row">
+                                        <div v-for="(slot, x) in row" class="flex column" >
+                                            <div class="farm-slot no-select" @mousedown="toggleFarmSlot(x,y)" @mouseover="mouseOverFarmSlot(x,y)">
+                                                <div class="farm-slot-container no-pointer no-select">
+                                                    <div :class="`farm-tooltip align-center no-pointer no-select ${farmSlots[y][x] === true ? 'farm-slot-true' : ''}`">{{x}}, {{y}}</div>
+                                                    <img src="public/seedmaker.png" class="farm-slot-seedmaker no-pointer no-select" v-show="farmSlots[y][x] === true">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -51,7 +53,7 @@
                         </div>
 
                         <!-- CORNER BUTTONS -->
-                        <div class="flex flex-row self-start mt-2">
+                        <div class="flex flex-row self-start mt-3">
                             <div @click="clearSeedMakers">
                                 <img src="public/trashcan.png" :class="`map-button px-1 ${showMixed ? '' : 'disabled'}`">
                                 <v-tooltip activator="parent" location="top">Delete All</v-tooltip>
@@ -141,6 +143,7 @@
                             <div class="flex row align-center justify-center donate-content">
                                 <div class="mr-4">Buy me a </div>
                                 <img src="public/coffee.png" class="filter-button" @click.stop="openurl('https://www.paypal.com/donate?hosted_button_id=28PBV9DFYQC72')">
+                                <div class="ml-2">!</div>
                             </div>
                         </div>
                     </div>
