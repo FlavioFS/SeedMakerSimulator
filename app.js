@@ -100,7 +100,7 @@ createApp({
                 toggleFarmSlot(x, y);
             }
         }
-
+        
         function setupFarmSlots() {
             const slots = [];
             
@@ -113,6 +113,18 @@ createApp({
             }
             
             farmSlots.value = slots;
+        }
+
+        function clearFarmSlots () {
+            for (let y = 0; y < 65; y++) {
+                for (let x = 0; x < 80; x++) {
+                    farmSlots.value[y][x] = false;
+                }
+            }
+        }
+
+        function loadSaveFile () {
+
         }
 
         function updateCoordinates() {
@@ -208,6 +220,8 @@ createApp({
             farmSlots,
             toggleFarmSlot,
             mouseOverFarmSlot,
+            clearFarmSlots,
+            loadSaveFile,
             daySchedule,
             isCalculatingSchedule,
             calculationProgress,
