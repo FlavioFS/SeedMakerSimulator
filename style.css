@@ -14,6 +14,15 @@ h1 {
     font-size: xxx-large;
 }
 
+h1.paint {
+    color: #E0A100;
+    text-shadow:
+        -3px 5px 0 rgba(0, 0, 0, 0.5),  
+        2px -2px 0 rgba(0, 0, 0, 0.5),
+        -2px 2px 0 rgba(0, 0, 0, 0.5),
+        2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
 .bg {
     background: url('public/bg.png') no-repeat center center fixed;
     width: 100%;
