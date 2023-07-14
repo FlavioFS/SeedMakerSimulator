@@ -96,6 +96,11 @@ createApp({
         const toggleFilterAncient = () => showAncient.value = !showAncient.value;
         const toggleFilterEmptyHours = () => showEmptyHours.value = !showEmptyHours.value;
         const toggleFarmSlot = (x, y) => farmSlots.value[y][x] = !farmSlots.value[y][x];
+        const mouseOverFarmSlot = (x, y) => {
+            if (Mouse.down > 0) {
+                toggleFarmSlot(x, y);
+            }
+        }
 
         function setupFarmSlots() {
             const slots = [];
@@ -199,6 +204,7 @@ createApp({
             day,
             farmSlots,
             toggleFarmSlot,
+            mouseOverFarmSlot,
             daySchedule,
             isCalculatingSchedule,
             calculationProgress,

@@ -389,3 +389,15 @@ select, input[type=number], input[type=text], .input {
     width: 2000px;
     height: 100px;
 }
+
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.no-pointer {
+    pointer-events: none;
+}

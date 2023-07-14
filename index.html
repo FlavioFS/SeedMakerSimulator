@@ -33,15 +33,15 @@
                 <!-- 80 x 65 -->
                 <div class="flex row justify-center my-4">
                     <div class="spacer"></div>
-                    <div class="farm-container">
-                        <img src="public/farm.jpg" class="farm">
-                        <div class="farm">
+                    <div class="farm-container no-select">
+                        <img src="public/farm.jpg" class="farm no-select">
+                        <div class="farm no-select">
                             <div v-for="(row, y) in farmSlots" class="flex row">
                                 <div v-for="(slot, x) in row" class="flex column" >
-                                    <div class="farm-slot" @click="toggleFarmSlot(x,y)">
-                                        <div class="farm-slot-container">
-                                            <div :class="`farm-tooltip align-center ${farmSlots[y][x] === true ? 'farm-slot-true' : ''}`">{{x}}, {{y}}</div>
-                                            <img src="public/seedmaker.png" class="farm-slot-seedmaker" v-show="farmSlots[y][x] === true">
+                                    <div class="farm-slot no-select" @mousedown="toggleFarmSlot(x,y)" @mouseover="mouseOverFarmSlot(x,y)">
+                                        <div class="farm-slot-container no-pointer no-select">
+                                            <div :class="`farm-tooltip align-center no-pointer no-select ${farmSlots[y][x] === true ? 'farm-slot-true' : ''}`">{{x}}, {{y}}</div>
+                                            <img src="public/seedmaker.png" class="farm-slot-seedmaker no-pointer no-select" v-show="farmSlots[y][x] === true">
                                         </div>
                                     </div>
                                 </div>
@@ -235,6 +235,7 @@
     </div>
 </body>
 
+<script src="mouse.js"></script>
 <script src="randomcs.js"></script>
 <script src="seedmaker.js"></script>
 <script src="app.js"></script>
