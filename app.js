@@ -69,17 +69,21 @@ createApp({
             "01:00", "01:10", "01:20", "01:30", "01:40", "01:50"
         ];
 
-        const gameID = ref(123456789);
-        const year = ref(1);
-        const season = ref(1);
-        const day = ref(1);
+        const profileIndex = ref(Profile.lastProfileIndex);
+        const profileList = ref(Profile.profileList);
+        const currentProfile = Profile.getCurrentProfile();
+
+        const gameID = ref(currentProfile.gameID);
+        const year = ref(currentProfile.year);
+        const season = ref(currentProfile.season);
+        const day = ref(currentProfile.day);
         const coordinates = ref("");
         const coordinatesRaw = ref([]);
         const daySchedule = ref({});
         const isCalculatingSchedule = ref(false);
         const calculationProgress = ref(0);
-        const farmSlots = ref([]);
-        setupFarmSlots();
+        const farmSlots = ref(currentProfile.farmSlots);
+        updateCoordinates();
 
         const show1 = ref(true);
         const show2 = ref(true);
@@ -99,20 +103,6 @@ createApp({
             if (Mouse.down > 0) {
                 toggleFarmSlot(x, y);
             }
-        }
-        
-        function setupFarmSlots() {
-            const slots = [];
-            
-            for (let y = 0; y < 65; y++) {
-                const row = [];
-                for (let x = 0; x < 80; x++) {
-                    row.push(false);
-                }
-                slots.push(row);
-            }
-            
-            farmSlots.value = slots;
         }
 
         function clearFarmSlots () {
