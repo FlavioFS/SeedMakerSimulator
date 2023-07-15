@@ -68,7 +68,28 @@ createApp({
             "00:00", "00:10", "00:20", "00:30", "00:40", "00:50",
             "01:00", "01:10", "01:20", "01:30", "01:40", "01:50"
         ];
-        const SEASONS = ["Spring", "Summer", "Autumn", "Winter"];
+        const SEASONS = [
+            {
+                name: "Spring",
+                icon: "public/season-spring.png",
+                value: 1
+            },
+            {
+                name: "Summer",
+                icon: "public/season-summer.png",
+                value: 2
+            },
+            {
+                name: "Autumn",
+                icon: "public/season-autumn.png",
+                value: 3
+            },
+            {
+                name: "Winter",
+                icon: "public/season-winter.png",
+                value: 4
+            }
+        ];
 
         const profileIndex = ref(Profile.lastProfileIndex);
         const profileList = ref(Profile.profileList);
@@ -208,6 +229,8 @@ createApp({
             return countSeedMakers(getCurrentProfile().farmSlots);
         });
         
+        const currentSeason = computed(() => SEASONS[season.value-1]);
+
         const daysPlayed = computed(() => {
             return getDaysPlayed(year.value, season.value, day.value);
         });
@@ -232,6 +255,7 @@ createApp({
         return {
             generateDay,
             gameID,
+            currentSeason,
             daysPlayed,
             coordinates,
             year,
