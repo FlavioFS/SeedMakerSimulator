@@ -68,10 +68,11 @@ createApp({
             "00:00", "00:10", "00:20", "00:30", "00:40", "00:50",
             "01:00", "01:10", "01:20", "01:30", "01:40", "01:50"
         ];
+        const SEASONS = ["Spring", "Summer", "Autumn", "Winter"];
 
         const profileIndex = ref(Profile.lastProfileIndex);
         const profileList = ref(Profile.profileList);
-        const currentProfile = Profile.getCurrentProfile();
+        const currentProfile = getCurrentProfile();
 
         const gameID = ref(currentProfile.gameID);
         const year = ref(currentProfile.year);
@@ -177,6 +178,35 @@ createApp({
         function openurl(url) {
             window.open(url, "__blank");
         }
+
+        function getCurrentProfile () {
+            return profileList.value[profileIndex.value];
+        };
+
+        function countSeedMakers(slots) {
+            let count = 0;
+
+            for (let y = 0; y < slots.length; y++) {
+                for (let x = 0; x < slots.length; x++) {
+                    if (slots[y][x] === true) count ++;
+                }
+            }
+
+            return count;
+        }
+
+        const currentSeedMakerCount = computed(() => {
+            return countSeedMakers(farmSlots.value);
+        });
+
+        const currentProfileDaysPlayed = computed(() => {
+            const profile = getCurrentProfile();
+            return getDaysPlayed(profile.year, profile.season, profile.day);
+        });
+
+        const currentProfileSeedMakerCount = computed(() => {
+            return countSeedMakers(getCurrentProfile().farmSlots);
+        });
         
         const daysPlayed = computed(() => {
             return getDaysPlayed(year.value, season.value, day.value);
@@ -212,12 +242,19 @@ createApp({
             mouseOverFarmSlot,
             clearFarmSlots,
             loadSaveFile,
+            profileIndex,
+            profileList,
+            currentSeedMakerCount,
+            currentProfile,
+            currentProfileDaysPlayed,
+            currentProfileSeedMakerCount,
             daySchedule,
             isCalculatingSchedule,
             calculationProgress,
             progressPercentage,
             filteredDaySchedule,
             DAYHOURS,
+            SEASONS,
             show1,
             show2,
             show3,

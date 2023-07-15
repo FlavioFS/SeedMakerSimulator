@@ -15,7 +15,7 @@ Profile.createFarmSlots = () => {
 
 Profile.createProfile = function () {
     const newProfile = {
-        name: `Profile ${this.profileList.length + 1}`,
+        name: `Farm ${this.profileList.length + 1}`,
         gameID: 123456789,
         year: 1,
         season: 1,
@@ -23,7 +23,6 @@ Profile.createProfile = function () {
         farmSlots: this.createFarmSlots()
     };
 
-    this.profileList.push(newProfile);
     return newProfile;
 };
 

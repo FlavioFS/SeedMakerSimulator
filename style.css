@@ -185,6 +185,20 @@ img.farm {
     line-height: 20px;
 }
 
+.profile-tooltip {
+    text-decoration: none;
+    align-content: center;
+}
+.profile-tooltip .tooltip {
+    top: -260px;
+    left: 0px;
+    width: 250px;
+    height: 200px;
+    z-index: 100;
+    text-align: center;
+    line-height: 20px;
+}
+
 .gameid-tooltip {
     text-decoration: none;
     align-content: center;
@@ -419,6 +433,9 @@ label {
     background-color: #A57D4B;
     transform: scale(1.1);
 }
+.cta-warning {
+    line-height: 18px;
+}
 
 button, select, input, .input {
     font-size: 24px;
@@ -640,10 +657,16 @@ select, input[type=number], input[type=text], .input {
 .pl { padding-left: 0.75rem; }
 .pr { padding-right: 0.75rem; }
 
+.font24 { font-size: 24px; }
+.font22 { font-size: 22px; }
 .font20 { font-size: 20px; }
 .font18 { font-size: 18px; }
 .font16 { font-size: 16px; }
 .font14 { font-size: 14px; }
+
+.pixelated {
+    image-rendering: pixelated;
+}
 
 .test {
     background-color: #000;

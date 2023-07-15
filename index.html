@@ -76,6 +76,42 @@
                         <div class="v-box ">
                             <div class="flex container column pa-2">
                                 
+                                <!-- PROFILES -->
+                                <div class="flex container column ma-0 pa-0 mb-5">
+                                    <label for="profile">Profile </label>
+                                    <div class="tooltip-activator">
+                                        <select v-model="profileIndex" id="profileIndex" name="profileIndex" class="date">
+                                            <option v-for="(profile, i) in profileList" :value="i">{{ profile.name }}</option>
+                                        </select>
+                                        <div class="profile-tooltip absolute">
+                                            <div class="tooltip align-center justify-center column pa-4 font20">
+                                                <div class="font24 mb-3">{{ currentProfile.name }}</div>
+                                                <div class="flex row justify-center">
+                                                    <div class="flex column align-end justify-center mr-2">
+                                                        <div>Game ID:</div>
+                                                        <div>Year:</div>
+                                                        <div>Season:</div>
+                                                        <div>Day:</div>
+                                                        <div>Days Played:</div>
+                                                        <div>Seed Makers:</div>
+                                                    </div>
+                                                    <div class="flex column align-start justify-center ml-2">
+                                                        <div>{{ currentProfile.gameID }} </div>
+                                                        <div>{{ currentProfile.year }}</div>
+                                                        <div>{{ SEASONS[currentProfile.season-1] }}</div>
+                                                        <div>{{ currentProfile.year }}</div>
+                                                        <div>{{ currentProfileDaysPlayed }}</div>
+                                                        <div>{{ currentProfileSeedMakerCount }} </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="my-2"></div>
+
                                 <!-- GAME ID -->
                                 <div class="flex container column ma-0 pa-0 tooltip-activator">
                                     <label for="gameID">Game ID (?)</label>
@@ -104,10 +140,7 @@
                                     <div class="v-box items-start ml mr">
                                         <label for="season" class="self-start">Season</label>
                                         <select v-model="season" id="season" name="season" class="date">
-                                            <option value=1>Spring</option>
-                                            <option value=2>Summer</option>
-                                            <option value=3>Fall</option>
-                                            <option value=4>Winter</option>
+                                            <option v-for="(item, i) in SEASONS" :value="i+1">{{ SEASONS[i] }}</option>
                                         </select>
                                     </div>
 
@@ -127,6 +160,13 @@
                                     </div>
                                 </div>
 
+                                <div class="my-4"></div>
+
+                                <!-- WARNING -->
+                                <div class="flex row justify-center align-center cta-warning" v-show="currentSeedMakerCount <= 0">
+                                    <img src="public/warning.png" class="pixelated mr-2"  height="27">
+                                    <div class="ml-2">Zero seed makers in the map.<br>Add some to generate day.</div>
+                                </div>
 
                                 <!-- GENERATE DAY -->
                                 <div class="button self-center">
@@ -135,7 +175,7 @@
                                     @click="generateDay"
                                     size="x-large"
                                     elevation="4"
-                                    :disabled="isCalculatingSchedule"
+                                    :disabled="isCalculatingSchedule || currentSeedMakerCount <= 0"
                                     class="cta mt-5 mb-3"
                                     :ripple="{ class: 'text-secondary' }">
                                         Generate Day
