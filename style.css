@@ -171,12 +171,51 @@ img.farm {
 }
 
 
+.farm-button-tooltip {
+    text-decoration: none;
+    align-content: center;
+}
+.farm-button-tooltip .tooltip {
+    top: -100px;
+    left: -40px;
+    width: 128px;
+    height: 50px;
+    z-index: 100;
+    text-align: center;
+    line-height: 20px;
+}
+
+.gameid-tooltip {
+    text-decoration: none;
+    align-content: center;
+}
+.gameid-tooltip .tooltip {
+    top: -80px;
+    left: 0px;
+    width: 380px;
+    height: 80px;
+    font-size: 16px;
+    z-index: 100;
+    text-align: center;
+    line-height: 20px;
+}
+@media screen and (max-width:1200px) {
+    .gameid-tooltip .tooltip {
+        left: -10px;
+    }
+}
+@media screen and (max-width:480px) {
+    .gameid-tooltip .tooltip {
+        left: -32px;
+    }
+}
+
+
 .seed-tooltip {
     pointer-events: none;
     text-decoration: none;
     align-content: center;
 }
-
 .seed-tooltip .tooltip {
     top: -45px;
     left: 0px;
@@ -185,6 +224,39 @@ img.farm {
     z-index: 100;
     text-align: center;
     line-height: 20px;
+}
+.failedseed-tooltip .tooltip {
+    font-size: 16px;
+}
+
+.seedmaker-tooltip {
+    pointer-events: none;
+    text-decoration: none;
+    align-content: center;
+}
+.seedmaker-tooltip .tooltip {
+    top: -45px;
+    left: 0px;
+    width: 200px;
+    height: 60px;
+    z-index: 100;
+    text-align: center;
+    line-height: 25px;
+}
+
+.filter-tooltip {
+    pointer-events: none;
+    text-decoration: none;
+    align-content: center;
+}
+.filter-tooltip .tooltip {
+    top: -110px;
+    left: -114px;
+    width: 260px;
+    height: 70px;
+    z-index: 100;
+    text-align: center;
+    line-height: 22px;
 }
 
 .tooltip {
@@ -567,6 +639,11 @@ select, input[type=number], input[type=text], .input {
 .pb { padding-bottom: 0.75rem; }
 .pl { padding-left: 0.75rem; }
 .pr { padding-right: 0.75rem; }
+
+.font20 { font-size: 20px; }
+.font18 { font-size: 18px; }
+.font16 { font-size: 16px; }
+.font14 { font-size: 14px; }
 
 .test {
     background-color: #000;

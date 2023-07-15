@@ -54,27 +54,39 @@
 
                         <!-- CORNER BUTTONS -->
                         <div class="flex flex-row self-start mt-3">
-                            <div @click="clearFarmSlots">
-                                <img src="public/trashcan.png" :class="`map-button px-1 ${showMixed ? '' : 'disabled'}`">
-                                <v-tooltip activator="parent" location="top">Delete All</v-tooltip>
+                            <div @click="clearFarmSlots" class="tooltip-activator">
+                                <img src="public/trashcan.png" class="map-button px-1">
+                                <div class="farm-button-tooltip absolute">
+                                    <div class="tooltip relative align-center">Delete All</div>
+                                </div>
                             </div>
-                            <div @click="loadSaveFile">
-                                <img src="public/computer.png" :class="`map-button px-1 ${showMixed ? '' : 'disabled'}`">
-                                <v-tooltip activator="parent" location="top">Load from savefile</v-tooltip>
+                            <div @click="loadSaveFile" class="tooltip-activator">
+                                <img src="public/computer.png" class="map-button px-1">
+                                <div class="farm-button-tooltip absolute">
+                                    <div class="tooltip align-center">Load from Savefile</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- FORM -->
-                <v-card color="primary" elevation="8" class="pa-1 ma-4">
+                <v-card color="primary" elevation="8" class="pa-1 ma-4 overflow-visible">
                     <div class="flex justify-center board">
                         <div class="v-box ">
                             <div class="flex container column pa-2">
                                 
                                 <!-- GAME ID -->
-                                <label for="gameID">Game ID</label>
-                                <input v-model="gameID" type="number" id="gameID" name="gameID" min="0">
+                                <div class="flex container column ma-0 pa-0 tooltip-activator">
+                                    <label for="gameID">Game ID (?)</label>
+                                    <input v-model="gameID" type="number" id="gameID" name="gameID" min="0">
+                                    <div class="gameid-tooltip absolute">
+                                        <div class="tooltip align-center">
+                                            Your game save has this number writen in its file name. <br>
+                                            You can find it at AppData/Roaming/StardewValley/Saves
+                                        </div>
+                                    </div>
+                                </div>
                                 
                                 <!-- CALENDAR -->
                                 <div class="h-box mt mb">
@@ -169,29 +181,50 @@
                                 <div class="flex row justify-start align-center items-center">
                                     <img :width="24" src="public/filter.png" class="ma-0">
                                     <div class="ml-1 mr-4 self-center">Filters:</div>
-                                    <div :class="`filter-button ${show1 ? '' : 'disabled'}`" @click="toggleFilter1">
-                                        1
-                                        <v-tooltip activator="parent" location="top">Filter: 1 Same Seed (the one inserted into the seed maker)</v-tooltip>
+                                    <div class="tooltip-activator"  @click="toggleFilter1">
+                                        <div :class="`filter-button ${show1 ? '' : 'disabled'}`">1</div>
+                                        <div class="filter-tooltip absolute">
+                                            <div class="tooltip align-center font20 column justify-center">
+                                                <span>Filter: 1 Same Seeds</span>
+                                                <span class="font14">(the one inserted into the seed maker)</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div :class="`filter-button ${show2 ? '' : 'disabled'}`" @click="toggleFilter2">
-                                        2
-                                        <v-tooltip activator="parent" location="top">Filter: 2 Same Seeds (the one inserted into the seed maker)</v-tooltip>
+                                    <div class="tooltip-activator" @click="toggleFilter2">
+                                        <div :class="`filter-button ${show2 ? '' : 'disabled'}`">2</div>
+                                        <div class="filter-tooltip absolute">
+                                            <div class="tooltip align-center font20 column justify-center">
+                                                <span>Filter: 2 Same Seeds</span>
+                                                <span class="font14">(the one inserted into the seed maker)</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div :class="`filter-button ${show3 ? '' : 'disabled'}`" @click="toggleFilter3">
-                                        3
-                                        <v-tooltip activator="parent" location="top">Filter: 3 Same Seeds (the one inserted into the seed maker)</v-tooltip>
+                                    <div class="tooltip-activator" @click="toggleFilter3">
+                                        <div :class="`filter-button ${show3 ? '' : 'disabled'}`">3</div>
+                                        <div class="filter-tooltip absolute">
+                                            <div class="tooltip align-center font20 column justify-center">
+                                                <span>Filter: 3 Same Seeds</span>
+                                                <span class="font14">(the one inserted into the seed maker)</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="flex justify-center align-center" @click="toggleFilterMixed">
+                                    <div class="flex justify-center align-center tooltip-activator" @click="toggleFilterMixed">
                                         <img src="public/mixed.png" :class="`filter-button px-1 ${showMixed ? '' : 'disabled'}`">
-                                        <v-tooltip activator="parent" location="top">Filter: Mixed Seeds</v-tooltip>
+                                        <div class="seed-tooltip absolute">
+                                            <div class="tooltip align-center font20">Filter: Mixed Seeds</div>
+                                        </div>
                                     </div>
-                                    <div class="flex justify-center align-center" @click="toggleFilterAncient">
+                                    <div class="flex justify-center align-center tooltip-activator" @click="toggleFilterAncient">
                                         <img src="public/ancient.png" :class="`filter-button px-1 ${showAncient ? '' : 'disabled'}`">
-                                        <v-tooltip activator="parent" location="top">Filter: Ancient Seed</v-tooltip>
+                                        <div class="seed-tooltip absolute">
+                                            <div class="tooltip align-center font20">Filter: Ancient Seed</div>
+                                        </div>
                                     </div>
-                                    <div class="flex justify-center align-center" @click="toggleFilterEmptyHours">
+                                    <div class="flex justify-center align-center tooltip-activator" @click="toggleFilterEmptyHours">
                                         <img src="public/clock.png" :class="`filter-button px-1 ${showEmptyHours ? '' : 'disabled'}`">
-                                        <v-tooltip activator="parent" location="top">Filter: Empty Hours</v-tooltip>
+                                        <div class="seed-tooltip absolute">
+                                            <div class="tooltip align-center font20">Filter: Empty Hours</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +245,7 @@
                                     <div class="time-of-day self-end mr-2 seedmaker-slot"></div>
 
                                     <div class="flex items-center align-center justify-center mb-2" v-for="(seedmaker, i) in daySchedule.seedMakers">
-                                        <div class="seedmaker-slot self-center flex justify-center align-center">
+                                        <div class="seedmaker-slot self-center flex justify-center align-center tooltip-activator">
                                             <div class="flex column">
                                                 <v-img
                                                 :width="32"
@@ -222,7 +255,9 @@
                                                 <div class="seedmaker-coord">X: {{ seedmaker.x }}</div>
                                                 <div class="seedmaker-coord">Y: {{ seedmaker.y }}</div>
                                             </div>
-                                            <v-tooltip activator="parent" location="top" class="tooltip">Seed Maker #{{seedmaker.index}} - (x: {{seedmaker.x}}, y:{{seedmaker.y}}) </v-tooltip>
+                                            <div class="seedmaker-tooltip absolute">
+                                                <div class="tooltip align-center">Seed Maker #{{seedmaker.index}}<br>(x: {{seedmaker.x}}, y:{{seedmaker.y}})</div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -270,7 +305,9 @@
                                                 cover
                                                 src="public/x.png"
                                                 ></v-img>
-                                                <v-tooltip activator="parent" location="top">Server failed to calculate this value.</v-tooltip>
+                                                <div class="seed-tooltip failedseed-tooltip absolute">
+                                                    <div class="tooltip align-center">Server failed to<br>calculate this value.</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -289,6 +326,7 @@
 <script src="mouse.js"></script>
 <script src="randomcs.js"></script>
 <script src="seedmaker.js"></script>
+<script src="profile.js"></script>
 <script src="app.js"></script>
 
 </html>
