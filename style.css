@@ -510,6 +510,11 @@ div.button > .v-btn {
     50% { transform: scale(1.1); }
     100% { transform: scale(1.0); }
  }
+ @keyframes bounceult {
+    0% { transform: scale(1.0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1.0); }
+ }
  
  .donate {
     background-image: url('public/speech.png');
@@ -540,6 +545,21 @@ div.button > .v-btn {
 .donate-button-group {
     padding-top: 3px;
     padding-bottom: 9px;
+}
+.bounce-animation {
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-name: bouncemax;
+}
+.bounce-animation:hover {
+    animation-name: bounceult;
+}
+.delay25 {
+    animation-delay: 0.25s;
+}
+.delay50 {
+    animation-delay: 0.5s;
 }
 /* =================================== */
     

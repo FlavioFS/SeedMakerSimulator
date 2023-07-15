@@ -3,7 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seed Maker Simulator - Stardew Valley</title>
+    <title>Seed Maker Simulator</title>
+    <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+
+    <!-- META TAGS -->
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="Seed Maker Simulator">
+    <meta property="og:title" content="Seed Maker Simulator">
+    <meta property="og:description" content="Seed Maker Simulator">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/public/og.png">
+    <meta property="og:image:secure_url" content="/public/og.png">
+    <!-- <meta property="og:url" content=""> -->
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Seed Maker Simulator">
+    <meta name="twitter:description" content="Seed Maker Simulator">
+    <meta name="og_twitter_card" content="summary_large_image">
+    <meta name="image" content="/public/og.png">
+    <meta name="twitter:image" content="/public/og.png">
+    <!-- <meta name="twitter:url" content=""> -->
+
+    <!-- Primary Meta Tags -->
+    <title>Flávio Freitas - Freelance Artist</title>
+    <meta name="description" content="Seed Maker Simulator">
+    <meta name="keywords" content="seed maker, seed maker simulator, stardew valley, ancient seed, mixed seeds">
+    <!-- META TAGS -->
+
     
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=VT323:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,400&display=swap" rel="stylesheet">
@@ -34,16 +61,18 @@
                 <div class="flex row justify-center my-4 mx-4">
                     <!-- MAP -->
                     <div class="flex column align-center justify-center">
-                        <div class="board box-shadow">
-                            <div class="farm-container no-select">
-                                <img src="public/farm.jpg" class="farm no-select">
-                                <div class="farm no-select">
-                                    <div v-for="(row, y) in farmSlots" class="flex row">
-                                        <div v-for="(slot, x) in row" class="flex column" >
-                                            <div class="farm-slot tooltip-activator no-select" @mousedown="toggleFarmSlot(x,y)" @mouseover="mouseOverFarmSlot(x,y)">
-                                                <div class="farm-slot-container no-pointer no-select">
-                                                    <div :class="`tooltip align-center ${farmSlots[y][x] === true ? 'tooltip-active' : ''}`">{{x}}, {{y}}</div>
-                                                    <img src="public/seedmaker.png" class="farm-slot-seedmaker" v-show="farmSlots[y][x] === true">
+                        <div class="elevation-8">
+                            <div class="board">
+                                <div class="farm-container no-select">
+                                    <img src="public/farm.jpg" class="farm no-select">
+                                    <div class="farm no-select">
+                                        <div v-for="(row, y) in farmSlots" class="flex row">
+                                            <div v-for="(slot, x) in row" class="flex column" >
+                                                <div class="farm-slot tooltip-activator no-select" @mousedown="toggleFarmSlot(x,y)" @mouseover="mouseOverFarmSlot(x,y)">
+                                                    <div class="farm-slot-container no-pointer no-select">
+                                                        <div :class="`tooltip align-center ${farmSlots[y][x] === true ? 'tooltip-active' : ''}`">{{x}}, {{y}}</div>
+                                                        <img src="public/seedmaker.png" class="farm-slot-seedmaker" v-show="farmSlots[y][x] === true">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -213,10 +242,10 @@
                                 </div>
                             </div>
                             <div class="flex row align-center mt-2">
-                                <div>
+                                <div class="bounce-animation delay25">
                                     <img src="public/paypal.png" class="donate-button filter-button" @click.stop="openurl('https://www.paypal.com/donate?hosted_button_id=28PBV9DFYQC72')">
                                 </div>
-                                <div>
+                                <div class="bounce-animation delay50">
                                     <img src="public/ko-fi.png" class="donate-button filter-button ml-1" @click.stop="openurl('https://ko-fi.com/flafdraws')">
                                 </div>
                             </div>
