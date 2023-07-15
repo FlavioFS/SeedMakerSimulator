@@ -145,6 +145,7 @@ h1.paint {
     position: relative;
     width: 1280px;
     height: 1040px;
+    cursor: pointer;
 }
 img.farm {
     width: 1280px;
@@ -188,6 +189,7 @@ img.farm {
 .profile-tooltip {
     text-decoration: none;
     align-content: center;
+    pointer-events: none;
 }
 .profile-tooltip .tooltip {
     top: -260px;
@@ -202,6 +204,7 @@ img.farm {
 .gameid-tooltip {
     text-decoration: none;
     align-content: center;
+    pointer-events: none;
 }
 .gameid-tooltip .tooltip {
     top: -80px;
@@ -223,7 +226,6 @@ img.farm {
         left: -32px;
     }
 }
-
 
 .seed-tooltip {
     pointer-events: none;
@@ -435,6 +437,10 @@ label {
 }
 .cta-warning {
     line-height: 18px;
+}
+
+button, select {
+    cursor: pointer;
 }
 
 button, select, input, .input {
