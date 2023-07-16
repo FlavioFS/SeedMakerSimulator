@@ -121,7 +121,7 @@ createApp({
         const toggleFilterMixed = () => showMixed.value = !showMixed.value;
         const toggleFilterAncient = () => showAncient.value = !showAncient.value;
         const toggleFilterEmptyHours = () => showEmptyHours.value = !showEmptyHours.value;
-        const toggleFarmSlot = (x, y) => farmSlots.value[y][x] = !farmSlots.value[y][x];
+        const toggleFarmSlot = (x, y) => { farmSlots.value[y][x] = !farmSlots.value[y][x]; debounceSave(); }
         const mouseOverFarmSlot = (x, y) => {
             if (Mouse.down > 0) {
                 toggleFarmSlot(x, y);
@@ -134,6 +134,8 @@ createApp({
                     farmSlots.value[y][x] = false;
                 }
             }
+
+            debounceSave();
         }
 
         function loadSaveFile () {
@@ -167,6 +169,11 @@ createApp({
 
         function saveProfiles() {
             Profile.saveProfiles(profileIndex.value, profileList.value);
+            console.log("Saved!");
+        }
+        
+        function debounceSave() {
+            Debounce.run(saveProfiles);
         }
 
         function updateCoordinates() {
@@ -248,6 +255,7 @@ createApp({
 
         function setSeason(value) {
             currentProfile.value.season =  value;
+            debounceSave();
         }
 
 
@@ -305,6 +313,7 @@ createApp({
             loadSaveFile,
             createNewProfile,
             deleteProfile,
+            debounceSave,
             profileIndex,
             profileList,
             setSeason,

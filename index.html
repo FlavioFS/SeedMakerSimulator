@@ -115,7 +115,7 @@
                                                 <label for="profile">Profile </label>
                                                 <div class="flex row align-center justify-start">
                                                     <div class="tooltip-activator">
-                                                        <select v-model="profileIndex" id="profileIndex" name="profileIndex" class="profile-select">
+                                                        <select v-model="profileIndex" id="profileIndex" name="profileIndex" class="profile-select" @change="debounceSave">
                                                             <option v-for="(profile, i) in profileList" :value="i">{{ profile.name }}</option>
                                                         </select>
                                                         <div class="profile-tooltip absolute">
@@ -159,10 +159,10 @@
                                             </div>
                                         </div>
 
-                                        <!-- GAME ID -->
+                                        <!-- PROFILE NAME -->
                                         <div class="flex column container mx-0 mt-2 tooltip-activator">
                                             <label for="name">Name</label>
-                                            <input v-model="currentProfile.name" type="text" id="name" name="name" min="0">
+                                            <input v-model="currentProfile.name" type="text" id="name" name="name" min="0" @change="debounceSave">
                                             <div class="flex row justify-center">
                                                 <div class="profile-name-tooltip absolute">
                                                     <div class="tooltip align-center">
@@ -178,7 +178,7 @@
                                         <!-- GAME ID -->
                                         <div class="flex container column ma-0 pa-0 tooltip-activator">
                                             <label for="gameID">Game ID (?)</label>
-                                            <input v-model="currentProfile.gameID" type="number" id="gameID" name="gameID" min="0">
+                                            <input v-model="currentProfile.gameID" type="number" id="gameID" name="gameID" min="0" @change="debounceSave">
                                             <div class="gameid-tooltip absolute">
                                                 <div class="tooltip align-center">
                                                     Your game save has this number writen in its file name. <br>
@@ -197,14 +197,13 @@
 
                                             <div class="v-box items-start mr-2">
                                                 <label for="year" class="self-start">Year</label>
-                                                <input v-model="currentProfile.year" type="number" id="year" name="year" class="date" min="1">
+                                                <input v-model="currentProfile.year" type="number" id="year" name="year" class="date" min="1" @change="debounceSave">
                                             </div>
                                             
                                             <div class="v-box items-start ml-2">
                                                 <label for="day" class="self-start">Day</label>
-                                                <input v-model="currentProfile.day" type="number" id="day" name="day" class="date" min="1" max="28">
+                                                <input v-model="currentProfile.day" type="number" id="day" name="day" class="date" min="1" max="28" @change="debounceSave">
                                             </div>
-                                            
                                         </div>
 
                                         <!-- SEASON -->
@@ -423,6 +422,7 @@
 </body>
 
 <script src="mouse.js"></script>
+<script src="debounce.js"></script>
 <script src="randomcs.js"></script>
 <script src="seedmaker.js"></script>
 <script src="profile.js"></script>
