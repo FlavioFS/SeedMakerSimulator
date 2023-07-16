@@ -148,7 +148,7 @@
                                         <!-- GAME ID -->
                                         <div class="flex container column ma-0 pa-0 tooltip-activator">
                                             <label for="gameID">Game ID (?)</label>
-                                            <input v-model="gameID" type="number" id="gameID" name="gameID" min="0">
+                                            <input v-model="currentProfile.gameID" type="number" id="gameID" name="gameID" min="0">
                                             <div class="gameid-tooltip absolute">
                                                 <div class="tooltip align-center">
                                                     Your game save has this number writen in its file name. <br>
@@ -167,12 +167,12 @@
 
                                             <div class="v-box items-start mr-2">
                                                 <label for="year" class="self-start">Year</label>
-                                                <input v-model="year" type="number" id="year" name="year" class="date" min="1">
+                                                <input v-model="currentProfile.year" type="number" id="year" name="year" class="date" min="1">
                                             </div>
                                             
                                             <div class="v-box items-start ml-2">
                                                 <label for="day" class="self-start">Day</label>
-                                                <input v-model="day" type="number" id="day" name="day" class="date" min="1" max="28">
+                                                <input v-model="currentProfile.day" type="number" id="day" name="day" class="date" min="1" max="28">
                                             </div>
                                             
                                         </div>
@@ -181,7 +181,7 @@
                                         <div class="v-box items-start">
                                             <label for="season" class="self-start">Season: {{ currentSeason.name }}</label>
                                             <div class="flex row justify-center align-center">
-                                                <div class="flex row justify-center season tooltip-activator" v-for="(iSeason, i) in SEASONS" @click="season = iSeason.value">
+                                                <div class="flex row justify-center season tooltip-activator" v-for="(iSeason, i) in SEASONS" @click="setSeason(iSeason.value)">
                                                     <img :src="iSeason.icon" :class="`filter-button ${season === iSeason.value ? 'active' : 'inactive'}`">
                                                     <div class="season-tooltip absolute">
                                                         <div class="tooltip align-center font20 column justify-center">
@@ -198,7 +198,7 @@
                                                 <label for="daysPlayed">Days Played:</label>
                                             </div>
                                             <div class="v-box align-start">
-                                                <div>{{daysPlayed}}</div>
+                                                <div>{{ daysPlayed }}</div>
                                             </div>
                                         </div>
 
@@ -229,8 +229,6 @@
                             </div>
                         </v-card>
                         
-                        <!-- <div class="mt mb"></div> -->
-
                         <div class="flex column mt-4">
                             <div class="flex row">
                                 <div id="donate" class="donate px-2 no-select" @click.stop="openurl('https://www.paypal.com/donate?hosted_button_id=28PBV9DFYQC72')">
@@ -337,7 +335,7 @@
                                                     <div class="seedmaker-coord">Y: {{ seedmaker.y }}</div>
                                                 </div>
                                                 <div class="seedmaker-tooltip absolute">
-                                                    <div class="tooltip align-center">Seed Maker #{{seedmaker.index}}<br>(x: {{seedmaker.x}}, y:{{seedmaker.y}})</div>
+                                                    <div class="tooltip align-center">Seed Maker #{{seedmaker.index + 1}}<br>(x: {{seedmaker.x}}, y:{{seedmaker.y}})</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -353,7 +351,7 @@
                                                 <div v-if="seed.type === 0" class="slot self-center flex justify-center align-center tooltip-activator">
                                                     <span class="seed self-center">{{ isSeedVisible(seed) ? seed.amount : '' }}</span>
                                                     <div class="seed-tooltip absolute">
-                                                        <div class="tooltip align-center">Same Seeds: {{ seed.amount }}</div>
+                                                        <div class="tooltip align-center">Same Seed{{seed.amount > 1 ? 's' : ''}}: {{ seed.amount }}</div>
                                                     </div>
                                                 </div>
                                             
@@ -365,7 +363,7 @@
                                                     ></v-img>
                                                     <div v-if="seed.amount > 1" v-show="showMixed" class="seed-counter">{{ seed.amount }}</div>
                                                     <div class="seed-tooltip absolute">
-                                                        <div class="tooltip align-center">Mixed Seeds: {{ seed.amount }}</div>
+                                                        <div class="tooltip align-center">Mixed Seed{{seed.amount > 1 ? 's' : ''}}: {{ seed.amount }}</div>
                                                     </div>
                                                 </div>
                                                 

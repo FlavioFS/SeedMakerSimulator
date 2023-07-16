@@ -91,20 +91,21 @@ createApp({
             }
         ];
 
-        const profileIndex = ref(Profile.lastProfileIndex);
-        const profileList = ref(Profile.profileList);
-        const currentProfile = getCurrentProfile();
+        const profileIndex = ref(0);
+        const profileList = ref([]);
+        loadSaveFile();
 
-        const gameID = ref(currentProfile.gameID);
-        const year = ref(currentProfile.year);
-        const season = ref(currentProfile.season);
-        const day = ref(currentProfile.day);
+        const gameID = computed(() => getCurrentProfile().gameID);
+        const year = computed(() => getCurrentProfile().year);
+        const season = computed(() => getCurrentProfile().season);
+        const day = computed(() => getCurrentProfile().day);
+        const farmSlots = computed(() => getCurrentProfile().farmSlots);
+
         const coordinates = ref("");
         const coordinatesRaw = ref([]);
         const daySchedule = ref({});
         const isCalculatingSchedule = ref(false);
         const calculationProgress = ref(0);
-        const farmSlots = ref(currentProfile.farmSlots);
         updateCoordinates();
 
         const show1 = ref(true);
@@ -136,7 +137,9 @@ createApp({
         }
 
         function loadSaveFile () {
-
+            const profiles = Profile.loadProfiles();
+            profileIndex.value = profiles.profileIndex;
+            profileList.value = profiles.profileList;
         }
 
         function updateCoordinates() {
@@ -216,9 +219,16 @@ createApp({
             return count;
         }
 
+        function setSeason(value) {
+            currentProfile.value.season =  value;
+        }
+
+
         const currentSeedMakerCount = computed(() => {
             return countSeedMakers(farmSlots.value);
         });
+
+        const currentProfile = computed(() => getCurrentProfile());
 
         const currentProfileDaysPlayed = computed(() => {
             const profile = getCurrentProfile();
@@ -268,6 +278,7 @@ createApp({
             loadSaveFile,
             profileIndex,
             profileList,
+            setSeason,
             currentSeedMakerCount,
             currentProfile,
             currentProfileDaysPlayed,

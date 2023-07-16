@@ -1,7 +1,4 @@
-const Profile = {
-    profileList: [],
-    lastProfileIndex: 0
-}
+const Profile = {}
 
 Profile.createFarmSlots = () => {
     const slots = [];
@@ -13,9 +10,9 @@ Profile.createFarmSlots = () => {
     return slots;
 }
 
-Profile.createProfile = function () {
+Profile.pushNewProfile = function (profileList) {
     const newProfile = {
-        name: `Farm ${this.profileList.length + 1}`,
+        name: `Farm ${profileList.length + 1}`,
         gameID: 123456789,
         year: 1,
         season: 1,
@@ -23,37 +20,45 @@ Profile.createProfile = function () {
         farmSlots: this.createFarmSlots()
     };
 
-    return newProfile;
+    profileList.push(newProfile);
+    return profileList;
 };
 
-Profile.saveProfiles = function (currentProfileID, newProfileList) {
-    localStorage.setItem("lastProfileIndex", currentProfileID);
+Profile.deleteProfile = (profileIndex, profileList) => {
+    if (profileIndex >= 0 && profileIndex < profileList.length)
+    {
+        profileList.splice(profileIndex, 1);
+        return true;
+    }
+    
+    return false;
+};
+
+Profile.saveProfiles = (currentProfileID, newProfileList) => {
+    localStorage.setItem("profileIndex", currentProfileID);
     localStorage.setItem("profileList", newProfileList);
 }
 
 Profile.loadProfiles = function () {
-    this.profileList = localStorage.getItem("profileList") || [];
+    return {
+        profileIndex: localStorage.getItem("profileIndex") || 0,
+        profileList: localStorage.getItem("profileList") || this.pushNewProfile([])
+    };
 }
 
-Profile.getCurrentProfile = function () {
-    return this.profileList[this.lastProfileIndex];
-}
+// Profile.init = function () {
+//     this.loadProfiles();
 
-Profile.init = function () {
-    this.loadProfiles();
-
-    if (this.profileList.length <= 0)
-    {
-        this.lastProfileIndex = 0;
-        this.profileList.push(this.createProfile());
-    }
-    else
-    {
-        this.lastProfileIndex = parseInt(localStorage.getItem("lastProfileIndex")) || 0;
-        if (this.lastProfileIndex >= this.profileList.length || this.lastProfileIndex < 0) {
-            this.lastProfileIndex = 0;
-        }
-    }
-}
-
-Profile.init();
+//     if (this.profileList.length <= 0)
+//     {
+//         this.lastProfileIndex = 0;
+//         this.profileList.push(this.createProfile());
+//     }
+//     else
+//     {
+//         this.lastProfileIndex = parseInt(localStorage.getItem("profileIndex")) || 0;
+//         if (this.lastProfileIndex >= this.profileList.length || this.lastProfileIndex < 0) {
+//             this.lastProfileIndex = 0;
+//         }
+//     }
+// }
