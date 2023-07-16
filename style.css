@@ -109,6 +109,7 @@ h1.paint {
     width: 48px;
     height: 48px;
     margin: 2px;
+    image-rendering: pixelated;
 }
 .seedmaker-slot {
     text-align: center;
@@ -200,6 +201,41 @@ img.farm {
     text-align: center;
     line-height: 20px;
 }
+.profile .filter-button {
+    width: 24px;
+    image-rendering: pixelated;
+}
+
+.profile-button-tooltip {
+    text-decoration: none;
+    align-content: center;
+    pointer-events: none;
+}
+.profile-button-tooltip .tooltip {
+    top: -40px;
+    left: 0px;
+    width: 150px;
+    height: 50px;
+    z-index: 100;
+    text-align: center;
+    line-height: 20px;
+}
+
+.profile-name-tooltip {
+    text-decoration: none;
+    align-content: center;
+    pointer-events: none;
+}
+.profile-name-tooltip .tooltip {
+    top: -100px;
+    left: 0px;
+    width: 250px;
+    height: 50px;
+    z-index: 100;
+    text-align: center;
+    line-height: 20px;
+}
+
 
 .season{
     width: 60px;
@@ -572,6 +608,7 @@ div.button > .v-btn {
     transform: scale(1.0);
     width: 48px;
     cursor: pointer;
+    image-rendering: pixelated;
 }
 .map-button:hover {
     filter: brightness(70%);
@@ -604,6 +641,7 @@ div.button > .v-btn {
         -2px 2px 0 #000,
         2px 2px 0 #000;
     cursor: pointer;
+    image-rendering: pixelated;
 }
 .filter-button:hover {
     filter: brightness(70%);
@@ -628,6 +666,10 @@ select, input[type=number], input[type=text], .input {
     font-weight: 400;
 }
 
+.profile-select {
+    width: 160px;
+}
+
 .date {
     width: 100px;
 }
@@ -649,7 +691,7 @@ select, input[type=number], input[type=text], .input {
 }
 .seed {
     font-weight: 800;
-    font-size: 28px;
+    font-size: 36px;
     color: white;
     text-shadow:
         2px 2px 0 #000,

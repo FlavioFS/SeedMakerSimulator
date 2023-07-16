@@ -142,6 +142,33 @@ createApp({
             profileList.value = profiles.profileList;
         }
 
+        function createNewProfile() {
+            Profile.pushNewProfile(profileList.value);
+            profileIndex.value = profileList.value.length-1;
+            saveProfiles();
+        }
+
+        function deleteProfile () {
+            const index = profileIndex.value;
+
+            if (profileList.value.length <= 1) {
+                profileIndex.value = 0;
+                profileList.value = [];
+                Profile.pushNewProfile(profileList.value);
+            }
+            else if (index >= 0 && index < profileList.value.length)
+            {
+                profileList.value.splice(index, 1);
+                if (index >= profileList.value.length) profileIndex.value = profileList.value.length-1;
+            }
+            
+            saveProfiles();
+        };
+
+        function saveProfiles() {
+            Profile.saveProfiles(profileIndex.value, profileList.value);
+        }
+
         function updateCoordinates() {
             const newCoords = [];
             
@@ -276,6 +303,8 @@ createApp({
             mouseOverFarmSlot,
             clearFarmSlots,
             loadSaveFile,
+            createNewProfile,
+            deleteProfile,
             profileIndex,
             profileList,
             setSeason,

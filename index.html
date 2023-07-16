@@ -106,44 +106,74 @@
                     <div class="flex column align-center mb-4 mx-4">
                         <v-card color="primary" elevation="8" class="pa-1 overflow-visible">
                             <div class="flex justify-center board">
-                                <div class="v-box ">
+                                <div class="v-box">
                                     <div class="flex container column pa-2">
                                         
                                         <!-- PROFILES -->
-                                        <div class="flex container column ma-0 pa-0 mb-5">
-                                            <label for="profile">Profile </label>
-                                            <div class="tooltip-activator">
-                                                <select v-model="profileIndex" id="profileIndex" name="profileIndex" class="date">
-                                                    <option v-for="(profile, i) in profileList" :value="i">{{ profile.name }}</option>
-                                                </select>
-                                                <div class="profile-tooltip absolute">
-                                                    <div class="tooltip align-center justify-center column pa-4 font20">
-                                                        <div class="font24 mb-3">{{ currentProfile.name }}</div>
-                                                        <div class="flex row justify-center">
-                                                            <div class="flex column align-end justify-center mr-2">
-                                                                <div>Game ID:</div>
-                                                                <div>Year:</div>
-                                                                <div>Season:</div>
-                                                                <div>Day:</div>
-                                                                <div>Days Played:</div>
-                                                                <div>Seed Makers:</div>
+                                        <div class="flex row align-center justify-start">
+                                            <div class="flex container column ma-0 pa-0">
+                                                <label for="profile">Profile </label>
+                                                <div class="flex row align-center justify-start">
+                                                    <div class="tooltip-activator">
+                                                        <select v-model="profileIndex" id="profileIndex" name="profileIndex" class="profile-select">
+                                                            <option v-for="(profile, i) in profileList" :value="i">{{ profile.name }}</option>
+                                                        </select>
+                                                        <div class="profile-tooltip absolute">
+                                                            <div class="tooltip align-center justify-center column pa-4 font20">
+                                                                <div class="font24 mb-3">{{ currentProfile.name }}</div>
+                                                                <div class="flex row justify-center">
+                                                                    <div class="flex column align-end justify-center mr-2">
+                                                                        <div>Game ID:</div>
+                                                                        <div>Year:</div>
+                                                                        <div>Season:</div>
+                                                                        <div>Day:</div>
+                                                                        <div>Days Played:</div>
+                                                                        <div>Seed Makers:</div>
+                                                                    </div>
+                                                                    <div class="flex column align-start justify-center ml-2">
+                                                                        <div>{{ currentProfile.gameID }} </div>
+                                                                        <div>{{ currentProfile.year }}</div>
+                                                                        <div>{{ SEASONS[currentProfile.season-1].name }}</div>
+                                                                        <div>{{ currentProfile.year }}</div>
+                                                                        <div>{{ currentProfileDaysPlayed }}</div>
+                                                                        <div>{{ currentProfileSeedMakerCount }} </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="flex column align-start justify-center ml-2">
-                                                                <div>{{ currentProfile.gameID }} </div>
-                                                                <div>{{ currentProfile.year }}</div>
-                                                                <div>{{ SEASONS[currentProfile.season-1].name }}</div>
-                                                                <div>{{ currentProfile.year }}</div>
-                                                                <div>{{ currentProfileDaysPlayed }}</div>
-                                                                <div>{{ currentProfileSeedMakerCount }} </div>
-                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="flex row ml-3 align-center justify-center tooltip-activator profile">
+                                                        <img src="public/plus.png" class="filter-button pixelated" @click="createNewProfile">
+                                                        <div class="profile-button-tooltip farm-button-tooltip absolute">
+                                                            <div class="tooltip relative align-center">New Profile</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex row ml-3 align-center justify-center tooltip-activator profile">
+                                                        <img src="public/minus.png" class="filter-button pixelated" @click="deleteProfile">
+                                                        <div class="profile-button-tooltip farm-button-tooltip absolute">
+                                                            <div class="tooltip relative align-center">Delete Profile</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
 
-                                        <div class="my-2"></div>
+                                        <!-- GAME ID -->
+                                        <div class="flex column container mx-0 mt-2 tooltip-activator">
+                                            <label for="name">Name</label>
+                                            <input v-model="currentProfile.name" type="text" id="name" name="name" min="0">
+                                            <div class="flex row justify-center">
+                                                <div class="profile-name-tooltip absolute">
+                                                    <div class="tooltip align-center">
+                                                        Name this profile.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+                                        <v-divider class="my-5"></v-divider>
 
                                         <!-- GAME ID -->
                                         <div class="flex container column ma-0 pa-0 tooltip-activator">
@@ -202,10 +232,10 @@
                                             </div>
                                         </div>
 
-                                        <div class="my-4"></div>
+                                        <v-divider class="my-5"></v-divider>
 
                                         <!-- WARNING -->
-                                        <div class="flex row justify-center align-center cta-warning" v-show="currentSeedMakerCount <= 0">
+                                        <div class="flex row justify-center align-center cta-warning mb-3" v-show="currentSeedMakerCount <= 0">
                                             <img src="public/warning.png" class="pixelated mr-2"  height="27">
                                             <div class="ml-2">Zero seed makers in the map.<br>Add some to generate day.</div>
                                         </div>
@@ -218,7 +248,7 @@
                                             size="x-large"
                                             elevation="4"
                                             :disabled="isCalculatingSchedule || currentSeedMakerCount <= 0"
-                                            class="cta mt-5 mb-3"
+                                            class="cta mt-2 mb-3"
                                             :ripple="{ class: 'text-secondary' }">
                                                 Generate Day
                                             </v-btn>
@@ -356,11 +386,7 @@
                                                 </div>
                                             
                                                 <div v-else-if="seed.type === 1" class="slot self-center flex justify-center align-center tooltip-activator relative pa-1">
-                                                    <v-img v-show="showMixed"
-                                                    :width="32"
-                                                    cover
-                                                    src="public/mixed.png"
-                                                    ></v-img>
+                                                    <img v-show="showMixed" width="48" src="public/mixed.png">
                                                     <div v-if="seed.amount > 1" v-show="showMixed" class="seed-counter">{{ seed.amount }}</div>
                                                     <div class="seed-tooltip absolute">
                                                         <div class="tooltip align-center">Mixed Seed{{seed.amount > 1 ? 's' : ''}}: {{ seed.amount }}</div>
@@ -368,22 +394,14 @@
                                                 </div>
                                                 
                                                 <div v-else-if="seed.type === 2" class="slot self-center flex justify-center align-center tooltip-activator pa-1">
-                                                    <v-img v-if="showAncient"
-                                                    :width="32"
-                                                    cover
-                                                    src="public/ancient.png"
-                                                    ></v-img>
+                                                    <img v-show="showMixed" width="48" src="public/ancient.png">
                                                     <div class="seed-tooltip absolute">
                                                         <div class="tooltip align-center">Ancient Seed: {{ seed.amount }}</div>
                                                     </div>
                                                 </div>
                 
                                                 <div v-else class="slot self-center flex justify-center align-center pa-1">
-                                                    <v-img
-                                                    :width="24"
-                                                    cover
-                                                    src="public/x.png"
-                                                    ></v-img>
+                                                    <img v-show="showMixed" width="48" src="public/x.png">
                                                     <div class="seed-tooltip failedseed-tooltip absolute">
                                                         <div class="tooltip align-center">Server failed to<br>calculate this value.</div>
                                                     </div>
