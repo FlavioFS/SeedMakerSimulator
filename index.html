@@ -269,15 +269,17 @@
                                 </div>
                             </div>
                             <div class="flex row align-center mt-2">
-                                <div class="bounce-animation delay25">
-                                    <a href="https://www.paypal.com/donate/?hosted_button_id=BPLZS6AERTQVY" target="_blank">
-                                        <img src="public/paypal.png" class="donate-button filter-button">
-                                    </a>
-                                </div>
-                                <div class="bounce-animation delay50">
-                                    <a href="https://ko-fi.com/flafdraws" target="_blank">
-                                        <img src="public/ko-fi.png" class="donate-button filter-button ml-1">
-                                    </a>
+                                <div class="donate-icon flex row justify-center tooltip-activator" v-for="(donate, i) in DONATES">
+                                    <div class="bounce-animation delay50">
+                                        <a :href="donate.url" target="_blank">
+                                            <img :src="donate.icon" class="donate-button filter-button ml-1">
+                                        </a>
+                                    </div>
+                                    <div class="donate-tooltip absolute">
+                                        <div class="tooltip align-center">
+                                            {{ donate.tooltip }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

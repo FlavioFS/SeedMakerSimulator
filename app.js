@@ -54,6 +54,12 @@ createApp({
             { name: "Ko-fi", icon: "public/kofi.png", url: "https://ko-fi.com/flafdraws" }
         ];
 
+        const DONATES = [
+            { tooltip: "PayPal", icon: "public/paypal.png", url: "https://www.paypal.com/donate/?hosted_button_id=BPLZS6AERTQVY" },
+            { tooltip: "Ko-fi", icon: "public/ko-fi.png", url: "https://ko-fi.com/flafdraws" },
+            { tooltip: "Pix", icon: "public/brazil.png", url: "https://raw.githubusercontent.com/FlavioFS/SeedMakerSimulator/gh-pages/public/pix.png" },
+        ]
+
         const DAYHOURS = [
             "06:00", "06:10", "06:20", "06:30", "06:40", "06:50",
             "07:00", "07:10", "07:20", "07:30", "07:40", "07:50",
@@ -335,6 +341,7 @@ createApp({
             progressPercentage,
             filteredDaySchedule,
             SOCIALS,
+            DONATES,
             DAYHOURS,
             SEASONS,
             show1,

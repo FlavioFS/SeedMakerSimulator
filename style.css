@@ -213,6 +213,24 @@ img.farm {
     line-height: 20px;
 }
 
+.donate-icon {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+.donate-tooltip {
+    text-decoration: none;
+    align-content: center;
+    pointer-events: none;
+}
+.donate-tooltip .tooltip {
+    top: -46px;
+    left: 0px;
+    width: 120px;
+    z-index: 100;
+    text-align: center;
+    line-height: 20px;
+}
+
 .profile-tooltip {
     text-decoration: none;
     align-content: center;
