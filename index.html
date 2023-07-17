@@ -48,7 +48,7 @@
 
 <body>
     <div id="app">
-        <div class="app-container">
+        <div class="app-container mb-0">
             <div class="flex column align-center container margin-auto">
                 
                 <div class="container mb-5 flex column align-center">
@@ -260,7 +260,7 @@
                         
                         <div class="flex column mt-4">
                             <div class="flex row">
-                                <div id="donate" class="donate px-2 no-select" @click.stop="openurl('https://www.paypal.com/donate?hosted_button_id=28PBV9DFYQC72')">
+                                <div id="donate" class="donate px-2 no-select" @click.stop="openurl('https://www.paypal.com/donate/?hosted_button_id=BPLZS6AERTQVY')">
                                     <div class="flex row align-center justify-center donate-content">
                                         <div class="mr-4">Buy me a </div>
                                         <img src="public/coffee.png" class="filter-button" @click.stop="openurl('https://ko-fi.com/flafdraws')">
@@ -270,10 +270,14 @@
                             </div>
                             <div class="flex row align-center mt-2">
                                 <div class="bounce-animation delay25">
-                                    <img src="public/paypal.png" class="donate-button filter-button" @click.stop="openurl('https://www.paypal.com/donate?hosted_button_id=28PBV9DFYQC72')">
+                                    <a href="https://www.paypal.com/donate/?hosted_button_id=BPLZS6AERTQVY" target="_blank">
+                                        <img src="public/paypal.png" class="donate-button filter-button">
+                                    </a>
                                 </div>
                                 <div class="bounce-animation delay50">
-                                    <img src="public/ko-fi.png" class="donate-button filter-button ml-1" @click.stop="openurl('https://ko-fi.com/flafdraws')">
+                                    <a href="https://ko-fi.com/flafdraws" target="_blank">
+                                        <img src="public/ko-fi.png" class="donate-button filter-button ml-1">
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -412,12 +416,33 @@
                             </div>
                         </v-card>
                     </div>
+                </div>
 
+            </div>
+
+            <!-- FOOTER SOCIAL LINKS -->
+            <div class="footer self-center pt-3 pb-2 elevation-8" id="footer-bar">
+                <div class="flex column align-center justify-center">
+                    <div class="flex row align-center justify-center">
+                        <div v-for="(social, i) in SOCIALS" class="tooltip-activator socials">
+                            <a :href="social.url" target="_blank">
+                                <img :src="social.icon" class="filter-button"/>
+                            </a>
+                            <div class="flex row justify-center">
+                                <div class="socials-tooltip absolute">
+                                    <div class="tooltip align-center">
+                                        {{ social.name }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="font20 flex row my-1">Created by @flafdraws (2023)</div>
                 </div>
             </div>
+            
+            <span class="bg"></span>
         </div>
-
-        <span class="bg"></span>
     </div>
 </body>
 

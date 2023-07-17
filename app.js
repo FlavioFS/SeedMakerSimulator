@@ -44,8 +44,16 @@ const vuetify = createVuetify({
 
 createApp({
     setup() {
+        const SOCIALS = [
+            { name: "Website", icon: "/public/socials/website.png", url: "https://flafdraws.github.io/art" },
+            { name: "Twitter", icon: "/public/socials/twitter.png", url: "https://twitter.com/flafdraws" },
+            { name: "Instagram", icon: "/public/socials/instagram.png", url: "https://instagram.com/flafdraws" },
+            { name: "Youtube", icon: "/public/socials/youtube.png", url: "https://www.youtube.com/channel/UCLq1fsQwY9fP3dOF8JBhjLw?sub_confirmation=1" },
+            { name: "Twitch", icon: "/public/socials/twitch.png", url: "https://twitch.com/flafdraws" },
+            { name: "Reddit", icon: "/public/socials/reddit.png", url: "https://www.reddit.com/user/flafdraws" },
+            { name: "Ko-fi", icon: "/public/socials/kofi.png", url: "https://ko-fi.com/flafdraws" }
+        ];
 
-        const DAYS_PLAYED = 247;
         const DAYHOURS = [
             "06:00", "06:10", "06:20", "06:30", "06:40", "06:50",
             "07:00", "07:10", "07:20", "07:30", "07:40", "07:50",
@@ -326,6 +334,7 @@ createApp({
             calculationProgress,
             progressPercentage,
             filteredDaySchedule,
+            SOCIALS,
             DAYHOURS,
             SEASONS,
             show1,
