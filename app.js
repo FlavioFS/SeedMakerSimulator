@@ -45,13 +45,13 @@ const vuetify = createVuetify({
 createApp({
     setup() {
         const SOCIALS = [
-            { name: "Website", icon: "public/socials/website.png", url: "https://flafdraws.github.io/art" },
-            { name: "Twitter", icon: "public/socials/twitter.png", url: "https://twitter.com/flafdraws" },
-            { name: "Instagram", icon: "public/socials/instagram.png", url: "https://instagram.com/flafdraws" },
-            { name: "Youtube", icon: "public/socials/youtube.png", url: "https://www.youtube.com/channel/UCLq1fsQwY9fP3dOF8JBhjLw?sub_confirmation=1" },
-            { name: "Twitch", icon: "public/socials/twitch.png", url: "https://twitch.com/flafdraws" },
-            { name: "Reddit", icon: "public/socials/reddit.png", url: "https://www.reddit.com/user/flafdraws" },
-            { name: "Ko-fi", icon: "public/socials/kofi.png", url: "https://ko-fi.com/flafdraws" }
+            { name: "Website", icon: "public/website.png", url: "https://flafdraws.github.io/art" },
+            { name: "Twitter", icon: "public/twitter.png", url: "https://twitter.com/flafdraws" },
+            { name: "Instagram", icon: "public/instagram.png", url: "https://instagram.com/flafdraws" },
+            { name: "Youtube", icon: "public/youtube.png", url: "https://www.youtube.com/channel/UCLq1fsQwY9fP3dOF8JBhjLw?sub_confirmation=1" },
+            { name: "Twitch", icon: "public/twitch.png", url: "https://twitch.com/flafdraws" },
+            { name: "Reddit", icon: "public/reddit.png", url: "https://www.reddit.com/user/flafdraws" },
+            { name: "Ko-fi", icon: "public/kofi.png", url: "https://ko-fi.com/flafdraws" }
         ];
 
         const DAYHOURS = [
