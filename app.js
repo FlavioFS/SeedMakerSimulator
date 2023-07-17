@@ -56,8 +56,7 @@ createApp({
 
         const DONATES = [
             { tooltip: "PayPal", icon: "public/paypal.png", url: "https://www.paypal.com/donate/?hosted_button_id=BPLZS6AERTQVY" },
-            { tooltip: "Ko-fi", icon: "public/ko-fi.png", url: "https://ko-fi.com/flafdraws" },
-            { tooltip: "Pix", icon: "public/brazil.png", url: "https://raw.githubusercontent.com/FlavioFS/SeedMakerSimulator/gh-pages/public/pix.png" },
+            { tooltip: "Ko-fi", icon: "public/ko-fi.png", url: "https://ko-fi.com/flafdraws" }
         ]
 
         const DAYHOURS = [
@@ -128,6 +127,7 @@ createApp({
         const showMixed = ref(true);
         const showAncient = ref(true);
         const showEmptyHours = ref(true);
+        const showPixPopup = ref(false);
         
         const toggleFilter1 = () => show1.value = !show1.value;
         const toggleFilter2 = () => show2.value = !show2.value;
@@ -141,6 +141,7 @@ createApp({
                 toggleFarmSlot(x, y);
             }
         }
+        const togglePixPopup = () => showPixPopup.value = !showPixPopup.value;
 
         function clearFarmSlots () {
             for (let y = 0; y < 65; y++) {
@@ -272,6 +273,9 @@ createApp({
             debounceSave();
         }
 
+        function copyPixToClipboard() {
+            copyTextToClipboard("43379701000196");
+        }
 
         const currentSeedMakerCount = computed(() => {
             return countSeedMakers(farmSlots.value);
@@ -350,6 +354,8 @@ createApp({
             showMixed,
             showAncient,
             showEmptyHours,
+            showPixPopup,
+            togglePixPopup,
             isSeedVisible,
             openurl,
             toggleFilter1,
@@ -357,7 +363,8 @@ createApp({
             toggleFilter3,
             toggleFilterMixed,
             toggleFilterAncient,
-            toggleFilterEmptyHours
+            toggleFilterEmptyHours,
+            copyPixToClipboard
         }
     }
 }).use(vuetify).mount('#app');

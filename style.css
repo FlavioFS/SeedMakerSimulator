@@ -231,6 +231,34 @@ img.farm {
     line-height: 20px;
 }
 
+.pix-popup {
+    display: none;
+    image-rendering: pixelated;
+    pointer-events: none;
+    color: white;
+}
+.pix-popup .popup {
+    position: relative;
+    top: -252px;
+    left: 0px;
+    z-index: 100;
+    text-align: center;
+    line-height: 20px;
+    pointer-events: all;
+    background-color: rgba(0, 0, 0, 0.90);
+}
+.pix-popup.visible {
+    display: flex;
+}
+.pix-close-btn {
+    position: absolute;
+    right: 12px;
+    top: 14px;
+}
+.pix-btn.filter-button {
+    width: 16px;
+}
+
 .profile-tooltip {
     text-decoration: none;
     align-content: center;

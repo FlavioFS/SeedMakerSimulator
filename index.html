@@ -258,6 +258,7 @@
                             </div>
                         </v-card>
                         
+                        <!-- DONATES -->
                         <div class="flex column mt-4">
                             <div class="flex row">
                                 <div id="donate" class="donate px-2 no-select" @click.stop="openurl('https://www.paypal.com/donate/?hosted_button_id=BPLZS6AERTQVY')">
@@ -269,6 +270,8 @@
                                 </div>
                             </div>
                             <div class="flex row align-center mt-2">
+                                
+                                <!-- DONATE LIST -->
                                 <div class="donate-icon flex row justify-center tooltip-activator" v-for="(donate, i) in DONATES">
                                     <div class="bounce-animation delay50">
                                         <a :href="donate.url" target="_blank">
@@ -278,6 +281,30 @@
                                     <div class="donate-tooltip absolute">
                                         <div class="tooltip align-center">
                                             {{ donate.tooltip }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- PIX -->
+                                <div class="donate-icon flex row justify-center tooltip-activator">
+                                    <div class="bounce-animation delay50">
+                                        <img src="public/brazil.png" class="donate-button filter-button ml-1" @click="togglePixPopup()">
+                                    </div>
+                                    <div class="donate-tooltip absolute">
+                                        <div class="tooltip align-center">Pix</div>
+                                    </div>
+                                    <div :class="`pix-popup absolute ${showPixPopup ? 'visible' : ''}`">
+                                        <div class="popup flex column justify-center align-center align-center">
+                                            <div class="pixelated pix-close-btn no-select" @click="togglePixPopup">
+                                                <img src="public/close.png" class="pix-btn filter-button">
+                                            </div>
+                                            <div class="flex column justify-center align-center ma-5 pt-5 px-5">
+                                                <img src="public/pix.png" width="153" height="153" class="no-select">
+                                                <div class="flex row align-center justify-center mt-3">
+                                                    <span class="font20 mr-2">43.379.701/0001-96</span>
+                                                    <img src="public/copy.png" class="pix-btn filter-button" @click="copyPixToClipboard">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -448,6 +475,7 @@
     </div>
 </body>
 
+<script src="clipboard.js"></script>
 <script src="mouse.js"></script>
 <script src="debounce.js"></script>
 <script src="randomcs.js"></script>
