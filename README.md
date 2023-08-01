@@ -22,8 +22,8 @@ A Seed Maker Machine simulator from Stardew Valley, in Javascript.
 
 # :moneybag: Donate | Doações
 ## **Brazil**
-Pix  &nbsp; **43.379.701/0001-96**  
-<img src="public/pix-raw.png">
+Pix  &nbsp; **flaf.pix@gmail.com**  
+<img src="public/pix.png">
 
 ## **Worldwide**
  + [**Paypal**](https://www.paypal.com/donate?hosted_button_id=28PBV9DFYQC72)
