@@ -426,14 +426,14 @@
                                                 </div>
                                                 
                                                 <div v-else-if="seed.type === 2" class="slot self-center flex justify-center align-center tooltip-activator pa-1">
-                                                    <img v-show="showMixed" width="48" src="public/ancient.png">
+                                                    <img v-show="showAncient" width="48" src="public/ancient.png">
                                                     <div class="seed-tooltip absolute">
                                                         <div class="tooltip align-center">Ancient Seed: {{ seed.amount }}</div>
                                                     </div>
                                                 </div>
                 
                                                 <div v-else class="slot self-center flex justify-center align-center pa-1">
-                                                    <img v-show="showMixed" width="48" src="public/x.png">
+                                                    <img width="48" src="public/x.png">
                                                     <div class="seed-tooltip failedseed-tooltip absolute">
                                                         <div class="tooltip align-center">Server failed to<br>calculate this value.</div>
                                                     </div>
